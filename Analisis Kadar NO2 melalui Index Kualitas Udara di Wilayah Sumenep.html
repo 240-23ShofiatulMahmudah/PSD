@@ -1,0 +1,983 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Analisis Kadar NO2 melalui Index Kualitas Udara di Wilayah Sumenep &#8212; Penambangan Data - ShofiatulMahmudah</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Analisis Kadar NO2 melalui Index Kualitas Udara di Wilayah Sumenep';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Proyek Sains Data - Portfolio Materi" href="intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/shopi.jpeg" class="logo__image only-light" alt="Penambangan Data - ShofiatulMahmudah - Home"/>
+    <img src="_static/shopi.jpeg" class="logo__image only-dark pst-js-only" alt="Penambangan Data - ShofiatulMahmudah - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Proyek Sains Data - Portfolio Materi
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Analisis Kadar NO2 melalui Index Kualitas Udara di Wilayah Sumenep</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FAnalisis Kadar NO2 melalui Index Kualitas Udara di Wilayah Sumenep.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Analisis Kadar NO2 melalui Index Kualitas Udara di Wilayah Sumenep.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Analisis Kadar NO2 melalui Index Kualitas Udara di Wilayah Sumenep</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#business-understanding">1. BUSINESS UNDERSTANDING</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-mengamati-kualitas-udara">a. Mengamati Kualitas Udara</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-polutan-yang-diamati">b. Polutan yang diamati</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-tujuan">c. Tujuan</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-understanding">2. DATA UNDERSTANDING</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-sumber-data">a. Sumber Data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eksplorasi-data-csv">3. EKSPLORASI DATA CSV</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-upload-csv-ke-google-colab">a. Upload CSV ke Google Colab</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-jalankan-kode-analisis-ini">b. Jalankan kode analisis ini</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-buat-grafik-time-series">c. Buat grafik time-series</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-buat-grafik-rata-rata-bulanan">d. Buat grafik rata-rata bulanan</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#e-simpan-hasil-rata-rata-bulanan-sebagai-csv">e. Simpan hasil rata-rata bulanan sebagai CSV</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-peta-dengan-folium">4. VISUALISASI PETA DENGAN FOLIUM</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-upload-geojson">a. Upload GeoJSON</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-buat-peta">b. Buat peta</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-simpan-peta">c. Simpan peta</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-hasil-grafik">5. ANALISIS HASIL GRAFIK</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-cari-3-hal-dari-grafik">a. Cari 3 hal dari grafik</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-buat-interpretasi-singkat">b. Buat interpretasi singkat</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-catat-statistik-utama">c. Catat statistik utama</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#output-csv-hasil-analisis">6. OUTPUT CSV HASIL ANALISIS</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-buat-csv-rata-rata-bulanan">a. Buat CSV rata-rata bulanan</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-download-csv">b. Download CSV</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">7. Kesimpulan</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="analisis-kadar-no2-melalui-index-kualitas-udara-di-wilayah-sumenep">
+<h1>Analisis Kadar NO2 melalui Index Kualitas Udara di Wilayah Sumenep<a class="headerlink" href="#analisis-kadar-no2-melalui-index-kualitas-udara-di-wilayah-sumenep" title="Link to this heading">#</a></h1>
+<section id="business-understanding">
+<h2>1. BUSINESS UNDERSTANDING<a class="headerlink" href="#business-understanding" title="Link to this heading">#</a></h2>
+<section id="a-mengamati-kualitas-udara">
+<h3>a. Mengamati Kualitas Udara<a class="headerlink" href="#a-mengamati-kualitas-udara" title="Link to this heading">#</a></h3>
+<p>Indeks Kualitas Udara (Air Quality Index/AQI) merupakan indikator yang digunakan untuk menggambarkan kondisi kualitas udara berdasarkan konsentrasi beberapa polutan di atmosfer. Semakin tinggi tingkat pencemaran, semakin buruk kualitas udara dan semakin besar potensi dampaknya terhadap kesehatan</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Polutan</p></th>
+<th class="head"><p>Sumber utama</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>NO₂</strong></p></td>
+<td><p>Kendaraan, industri, pembakaran bahan bakar</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>CO</strong></p></td>
+<td><p>Pembakaran tidak sempurna</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>SO₂</strong></p></td>
+<td><p>Industri dan pembakaran bahan bakar fosil</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>O₃</strong></p></td>
+<td><p>Reaksi kimia polutan di atmosfer</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>PM2.5/PM10</strong></p></td>
+<td><p>Debu, kendaraan, pembakaran, industri</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="b-polutan-yang-diamati">
+<h3>b. Polutan yang diamati<a class="headerlink" href="#b-polutan-yang-diamati" title="Link to this heading">#</a></h3>
+<p>Pada penelitian ini, polutan yang diamati adalah Nitrogen Dioksida (NO₂). NO₂ dipilih karena merupakan salah satu parameter kualitas udara yang tersedia pada data Sentinel-5P/TROPOMI dari Copernicus dan dapat digunakan untuk mengamati perubahan NO₂ secara temporal maupun spasial.</p>
+</section>
+<section id="c-tujuan">
+<h3>c. Tujuan<a class="headerlink" href="#c-tujuan" title="Link to this heading">#</a></h3>
+<p>Menganalisis perubahan nilai NO₂ di wilayah Sumenep selama periode 24 Agustus 2025 sampai 24 Agustus 2026 berdasarkan data Sentinel-5P/TROPOMI.</p>
+</section>
+</section>
+<section id="data-understanding">
+<h2>2. DATA UNDERSTANDING<a class="headerlink" href="#data-understanding" title="Link to this heading">#</a></h2>
+<section id="a-sumber-data">
+<h3>a. Sumber Data<a class="headerlink" href="#a-sumber-data" title="Link to this heading">#</a></h3>
+<p>Data NO₂ diperoleh dari Copernicus Data Space Ecosystem menggunakan satelit <strong>Sentinel-5P/TROPOMI</strong>. Data diunduh dalam format CSV time-series.</p>
+<p>Sumber: <a class="reference external" href="https://dataspace.copernicus.eu/">https://dataspace.copernicus.eu/</a></p>
+<p><strong>Dataset:</strong></p>
+<p><img alt="dataset" src="_images/Dataset.csv" /></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Keterangan</p></th>
+<th class="head"><p>Isi</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Sumber</p></td>
+<td><p>Copernicus Data Space Ecosystem</p></td>
+</tr>
+<tr class="row-odd"><td><p>Satelit</p></td>
+<td><p>Sentinel-5P</p></td>
+</tr>
+<tr class="row-even"><td><p>Instrumen</p></td>
+<td><p>TROPOMI</p></td>
+</tr>
+<tr class="row-odd"><td><p>Parameter</p></td>
+<td><p>NO₂</p></td>
+</tr>
+<tr class="row-even"><td><p>Jenis data</p></td>
+<td><p>Tropospheric NO₂ Column</p></td>
+</tr>
+<tr class="row-odd"><td><p>Satuan</p></td>
+<td><p>mol/m²</p></td>
+</tr>
+<tr class="row-even"><td><p>Wilayah</p></td>
+<td><p>Sumenep, Madura</p></td>
+</tr>
+<tr class="row-odd"><td><p>Periode</p></td>
+<td><p>24 Agustus 2025 – 24 Agustus 2026</p></td>
+</tr>
+<tr class="row-even"><td><p>Format</p></td>
+<td><p>CSV</p></td>
+</tr>
+<tr class="row-odd"><td><p>Jumlah observasi</p></td>
+<td><p>294</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Wilayah:</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Nilai</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Wilayah</p></td>
+<td><p>Sumenep, Madura</p></td>
+</tr>
+<tr class="row-odd"><td><p>Bentuk AOI</p></td>
+<td><p>Polygon</p></td>
+</tr>
+<tr class="row-even"><td><p>Longitude</p></td>
+<td><p>113.608246 – 114.114990</p></td>
+</tr>
+<tr class="row-odd"><td><p>Latitude</p></td>
+<td><p>-7.134248 – -6.865082</p></td>
+</tr>
+<tr class="row-even"><td><p>Format</p></td>
+<td><p>GeoJSON</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Polygon&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;coordinates&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">[</span>
+      <span class="p">[</span><span class="mf">113.608246</span><span class="p">,</span> <span class="o">-</span><span class="mf">6.865082</span><span class="p">],</span>
+      <span class="p">[</span><span class="mf">114.11499</span><span class="p">,</span> <span class="o">-</span><span class="mf">6.865082</span><span class="p">],</span>
+      <span class="p">[</span><span class="mf">114.11499</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.134248</span><span class="p">],</span>
+      <span class="p">[</span><span class="mf">113.608246</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.134248</span><span class="p">],</span>
+      <span class="p">[</span><span class="mf">113.608246</span><span class="p">,</span> <span class="o">-</span><span class="mf">6.865082</span><span class="p">]</span>
+    <span class="p">]</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Dua File dataset:</strong></p>
+<ul class="simple">
+<li><p><img alt="dataset" src="_images/Dataset.csv" /></p></li>
+<li><p><img alt="dataset" src="_images/AOI_Sumenep.geojson" /></p></li>
+</ul>
+<p><img alt="image" src="https://hackmd.io/_uploads/HJ0v8ubuGg.png" /></p>
+</section>
+</section>
+<section id="eksplorasi-data-csv">
+<h2>3. EKSPLORASI DATA CSV<a class="headerlink" href="#eksplorasi-data-csv" title="Link to this heading">#</a></h2>
+<section id="a-upload-csv-ke-google-colab">
+<h3>a. Upload CSV ke Google Colab<a class="headerlink" href="#a-upload-csv-ke-google-colab" title="Link to this heading">#</a></h3>
+<p>jalankan:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">google.colab</span><span class="w"> </span><span class="kn">import</span> <span class="n">files</span>
+
+<span class="n">uploaded</span> <span class="o">=</span> <span class="n">files</span><span class="o">.</span><span class="n">upload</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><img alt="image" src="https://hackmd.io/_uploads/Skfvch-Ofe.png" /></p>
+</section>
+<section id="b-jalankan-kode-analisis-ini">
+<h3>b. Jalankan kode analisis ini<a class="headerlink" href="#b-jalankan-kode-analisis-ini" title="Link to this heading">#</a></h3>
+<p>Setelah upload, jalankan:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Membaca file CSV</span>
+<span class="n">file_name</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">uploaded</span><span class="p">))</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
+
+<span class="c1"># Mengubah kolom tanggal</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;C0/date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;C0/date&quot;</span><span class="p">])</span>
+
+<span class="c1"># Mengurutkan berdasarkan tanggal</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;C0/date&quot;</span><span class="p">)</span>
+
+<span class="c1"># Menampilkan informasi dataset</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Jumlah data:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tanggal awal:&quot;</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;C0/date&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">.</span><span class="n">date</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tanggal akhir:&quot;</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;C0/date&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">date</span><span class="p">())</span>
+
+<span class="c1"># Statistik NO2</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Statistik NO2:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;C0/mean&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+</pre></div>
+</div>
+<p><img alt="image" src="https://hackmd.io/_uploads/rJPco3WuMg.png" /></p>
+</section>
+<section id="c-buat-grafik-time-series">
+<h3>c. Buat grafik time-series<a class="headerlink" href="#c-buat-grafik-time-series" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;C0/date&quot;</span><span class="p">],</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;C0/mean&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Perubahan NO₂ di Sumenep&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Tanggal&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;NO₂ (mol/m²)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><img alt="image" src="https://hackmd.io/_uploads/B1yW3h-OMg.png" /></p>
+</section>
+<section id="d-buat-grafik-rata-rata-bulanan">
+<h3>d. Buat grafik rata-rata bulanan<a class="headerlink" href="#d-buat-grafik-rata-rata-bulanan" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">monthly</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;C0/date&quot;</span><span class="p">)[</span><span class="s2">&quot;C0/mean&quot;</span><span class="p">]</span>
+    <span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">&quot;ME&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">monthly</span><span class="p">[</span><span class="s2">&quot;C0/date&quot;</span><span class="p">],</span>
+    <span class="n">monthly</span><span class="p">[</span><span class="s2">&quot;C0/mean&quot;</span><span class="p">],</span>
+    <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span>
+<span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Rata-rata Bulanan NO₂ di Sumenep&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Bulan&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;NO₂ (mol/m²)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><img alt="image" src="https://hackmd.io/_uploads/rJ5ch3WuGl.png" /></p>
+</section>
+<section id="e-simpan-hasil-rata-rata-bulanan-sebagai-csv">
+<h3>e. Simpan hasil rata-rata bulanan sebagai CSV<a class="headerlink" href="#e-simpan-hasil-rata-rata-bulanan-sebagai-csv" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">monthly</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+    <span class="s2">&quot;NO2_Sumenep_Bulanan.csv&quot;</span><span class="p">,</span>
+    <span class="n">index</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;CSV berhasil dibuat.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Eksplorasi data dilakukan menggunakan Google Colab dengan Python. Data CSV NO₂ diolah untuk melihat perubahan nilai NO₂ berdasarkan waktu. Analisis dilakukan menggunakan nilai rata-rata NO₂ (C0/mean) dan divisualisasikan dalam bentuk grafik time-series serta rata-rata bulanan.</p>
+</section>
+</section>
+<section id="visualisasi-peta-dengan-folium">
+<h2>4. VISUALISASI PETA DENGAN FOLIUM<a class="headerlink" href="#visualisasi-peta-dengan-folium" title="Link to this heading">#</a></h2>
+<p>Membuat peta wilayah pengamatan Sumenep menggunakan:</p>
+<p>GeoJSON + Folium + Google Colab</p>
+<section id="a-upload-geojson">
+<h3>a. Upload GeoJSON<a class="headerlink" href="#a-upload-geojson" title="Link to this heading">#</a></h3>
+<p>di google colab:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">google.colab</span><span class="w"> </span><span class="kn">import</span> <span class="n">files</span>
+
+<span class="n">uploaded_geojson</span> <span class="o">=</span> <span class="n">files</span><span class="o">.</span><span class="n">upload</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><img alt="image" src="https://hackmd.io/_uploads/H1T-7Tbdzl.png" /></p>
+</section>
+<section id="b-buat-peta">
+<h3>b. Buat peta<a class="headerlink" href="#b-buat-peta" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">folium</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
+<span class="c1"># Membaca GeoJSON</span>
+<span class="n">file_geojson</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">uploaded_geojson</span><span class="p">))</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_geojson</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">geojson_data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="c1"># Membuat peta</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span>
+    <span class="n">location</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">7.0</span><span class="p">,</span> <span class="mf">113.85</span><span class="p">],</span>
+    <span class="n">zoom_start</span><span class="o">=</span><span class="mi">9</span>
+<span class="p">)</span>
+
+<span class="c1"># Menambahkan AOI</span>
+<span class="n">folium</span><span class="o">.</span><span class="n">GeoJson</span><span class="p">(</span>
+    <span class="n">geojson_data</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;AOI Sumenep&quot;</span><span class="p">,</span>
+    <span class="n">tooltip</span><span class="o">=</span><span class="s2">&quot;Wilayah Pengamatan Sumenep&quot;</span>
+<span class="p">)</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+
+<span class="n">folium</span><span class="o">.</span><span class="n">LayerControl</span><span class="p">()</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+
+<span class="n">m</span>
+</pre></div>
+</div>
+<p>Setelah dijalankan, akan muncul peta interaktif.
+<img alt="image" src="https://hackmd.io/_uploads/Bk81Sa-dzx.png" /></p>
+</section>
+<section id="c-simpan-peta">
+<h3>c. Simpan peta<a class="headerlink" href="#c-simpan-peta" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;Peta_AOI_Sumenep.html&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>file yang dihasilkan:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Peta_AOI_Sumenep</span><span class="o">.</span><span class="n">html</span>
+</pre></div>
+</div>
+<p>Visualisasi spasial dilakukan menggunakan Folium dengan memanfaatkan file GeoJSON sebagai batas wilayah pengamatan. Peta digunakan untuk menampilkan Area of Interest (AOI) penelitian di wilayah Sumenep.</p>
+</section>
+</section>
+<section id="analisis-hasil-grafik">
+<h2>5. ANALISIS HASIL GRAFIK<a class="headerlink" href="#analisis-hasil-grafik" title="Link to this heading">#</a></h2>
+<p>Gunakan hasil grafik time-series dan rata-rata bulanan dari Point 3.</p>
+<section id="a-cari-3-hal-dari-grafik">
+<h3>a. Cari 3 hal dari grafik<a class="headerlink" href="#a-cari-3-hal-dari-grafik" title="Link to this heading">#</a></h3>
+<p>Catat:</p>
+<ol class="arabic simple">
+<li><p>Nilai NO₂ tertinggi dan tanggalnya.</p></li>
+<li><p>Nilai NO₂ terendah dan tanggalnya.</p></li>
+<li><p>Bulan dengan rata-rata NO₂ tertinggi dan terendah.</p></li>
+</ol>
+<p>Dari data CSV yang kamu gunakan sebelumnya, hasilnya:</p>
+<ul class="simple">
+<li><p>Tertinggi: 10 Desember 2025 → 3.5046 × 10⁻⁵ mol/m²</p></li>
+<li><p>Terendah: 16 November 2025 → -1.3911 × 10⁻⁶ mol/m²</p></li>
+<li><p>Rata-rata bulanan tertinggi berada pada Januari–Februari 2026.</p></li>
+</ul>
+</section>
+<section id="b-buat-interpretasi-singkat">
+<h3>b. Buat interpretasi singkat<a class="headerlink" href="#b-buat-interpretasi-singkat" title="Link to this heading">#</a></h3>
+<p>Berdasarkan hasil visualisasi, nilai NO₂ di wilayah pengamatan Sumenep mengalami fluktuasi selama periode 24 Agustus 2025–24 Agustus 2026. Nilai NO₂ tertinggi tercatat pada 10 Desember 2025, sedangkan nilai terendah tercatat pada 16 November 2025. Rata-rata bulanan menunjukkan nilai relatif tinggi pada akhir 2025 hingga awal 2026 dan kemudian mengalami perubahan pada bulan-bulan berikutnya.</p>
+</section>
+<section id="c-catat-statistik-utama">
+<h3>c. Catat statistik utama<a class="headerlink" href="#c-catat-statistik-utama" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Statistik</p></th>
+<th class="head text-right"><p>Hasil</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Jumlah observasi</p></td>
+<td class="text-right"><p>294</p></td>
+</tr>
+<tr class="row-odd"><td><p>Rata-rata NO₂</p></td>
+<td class="text-right"><p>1.3293 × 10⁻⁵ mol/m²</p></td>
+</tr>
+<tr class="row-even"><td><p>Minimum</p></td>
+<td class="text-right"><p>−1.3911 × 10⁻⁶ mol/m²</p></td>
+</tr>
+<tr class="row-odd"><td><p>Maksimum</p></td>
+<td class="text-right"><p>3.5046 × 10⁻⁵ mol/m²</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="output-csv-hasil-analisis">
+<h2>6. OUTPUT CSV HASIL ANALISIS<a class="headerlink" href="#output-csv-hasil-analisis" title="Link to this heading">#</a></h2>
+<section id="a-buat-csv-rata-rata-bulanan">
+<h3>a. Buat CSV rata-rata bulanan<a class="headerlink" href="#a-buat-csv-rata-rata-bulanan" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">monthly</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+    <span class="s2">&quot;NO2_Sumenep_Bulanan.csv&quot;</span><span class="p">,</span>
+    <span class="n">index</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="b-download-csv">
+<h3>b. Download CSV<a class="headerlink" href="#b-download-csv" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">google.colab</span><span class="w"> </span><span class="kn">import</span> <span class="n">files</span>
+
+<span class="n">files</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;NO2_Sumenep_Bulanan.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>file terunduh:</p>
+<p><img alt="dataset" src="NO2_Sumenep_Bulanan.csv" /></p>
+<p>Hasil pengolahan data NO₂ kemudian dirangkum berdasarkan rata-rata bulanan dan disimpan dalam format CSV. File tersebut digunakan sebagai data hasil analisis dan dapat digunakan kembali untuk visualisasi atau pembuatan dashboard.</p>
+</section>
+</section>
+<section id="kesimpulan">
+<h2>7. Kesimpulan<a class="headerlink" href="#kesimpulan" title="Link to this heading">#</a></h2>
+<p>Data Sentinel-5P/TROPOMI dari Copernicus dapat digunakan untuk mengamati perubahan NO₂ di wilayah Sumenep. Selama periode 24 Agustus 2025–24 Agustus 2026, nilai NO₂ mengalami fluktuasi dari waktu ke waktu. Analisis dilakukan menggunakan Python untuk menghasilkan statistik dan visualisasi grafik, sedangkan Folium digunakan untuk menampilkan wilayah pengamatan berdasarkan AOI GeoJSON.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Proyek Sains Data - Portfolio Materi</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#business-understanding">1. BUSINESS UNDERSTANDING</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-mengamati-kualitas-udara">a. Mengamati Kualitas Udara</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-polutan-yang-diamati">b. Polutan yang diamati</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-tujuan">c. Tujuan</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-understanding">2. DATA UNDERSTANDING</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-sumber-data">a. Sumber Data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eksplorasi-data-csv">3. EKSPLORASI DATA CSV</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-upload-csv-ke-google-colab">a. Upload CSV ke Google Colab</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-jalankan-kode-analisis-ini">b. Jalankan kode analisis ini</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-buat-grafik-time-series">c. Buat grafik time-series</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-buat-grafik-rata-rata-bulanan">d. Buat grafik rata-rata bulanan</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#e-simpan-hasil-rata-rata-bulanan-sebagai-csv">e. Simpan hasil rata-rata bulanan sebagai CSV</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-peta-dengan-folium">4. VISUALISASI PETA DENGAN FOLIUM</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-upload-geojson">a. Upload GeoJSON</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-buat-peta">b. Buat peta</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-simpan-peta">c. Simpan peta</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-hasil-grafik">5. ANALISIS HASIL GRAFIK</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-cari-3-hal-dari-grafik">a. Cari 3 hal dari grafik</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-buat-interpretasi-singkat">b. Buat interpretasi singkat</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-catat-statistik-utama">c. Catat statistik utama</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#output-csv-hasil-analisis">6. OUTPUT CSV HASIL ANALISIS</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-buat-csv-rata-rata-bulanan">a. Buat CSV rata-rata bulanan</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-download-csv">b. Download CSV</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">7. Kesimpulan</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By ShofiatulMahmudah (24041100023)
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

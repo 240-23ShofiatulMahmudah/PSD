@@ -35,8 +35,7 @@ Data NO₂ diperoleh dari Copernicus Data Space Ecosystem menggunakan satelit **
 Sumber: https://dataspace.copernicus.eu/
 
 **Dataset:** 
-
-![dataset](Dataset.csv)
+![Download Data csv](Dataset.csv)
 
 | Keterangan       | Isi                               |
 | ---------------- | --------------------------------- |
@@ -75,11 +74,10 @@ Sumber: https://dataspace.copernicus.eu/
   ]
 }
 ```
-**Dua File dataset:**
-* ![dataset](Dataset.csv) 
-* ![dataset](AOI_Sumenep.geojson)
 
-![image](https://hackmd.io/_uploads/HJ0v8ubuGg.png)
+* ![Download File GeoJSON](AOI_Sumenep.geojson)
+
+![Peta AOI Sumenep](1.png)
 
 ## 3. EKSPLORASI DATA CSV
 ### a. Upload CSV ke Google Colab
@@ -89,7 +87,7 @@ from google.colab import files
 
 uploaded = files.upload()
 ```
-![image](https://hackmd.io/_uploads/Skfvch-Ofe.png)
+![image](3.png)
 
 ### b. Jalankan kode analisis ini
 Setelah upload, jalankan:
@@ -116,7 +114,7 @@ print("Tanggal akhir:", df["C0/date"].max().date())
 print("\nStatistik NO2:")
 print(df["C0/mean"].describe())
 ```
-![image](https://hackmd.io/_uploads/rJPco3WuMg.png)
+![image](4.png)
 
 ### c. Buat grafik time-series
 ```
@@ -135,7 +133,7 @@ plt.xticks(rotation=45)
 plt.tight_layout()
 plt.show()
 ```
-![image](https://hackmd.io/_uploads/B1yW3h-OMg.png)
+![image](5.png)
 
 ### d. Buat grafik rata-rata bulanan
 
@@ -163,7 +161,7 @@ plt.xticks(rotation=45)
 plt.tight_layout()
 plt.show()
 ```
-![image](https://hackmd.io/_uploads/rJ5ch3WuGl.png)
+![image](6.png)
 
 ### e. Simpan hasil rata-rata bulanan sebagai CSV
 ```
@@ -188,7 +186,7 @@ from google.colab import files
 uploaded_geojson = files.upload()
 ```
 
-![image](https://hackmd.io/_uploads/H1T-7Tbdzl.png)
+![image](7.png)
 
 ### b. Buat peta
 ```
@@ -219,7 +217,7 @@ folium.LayerControl().add_to(m)
 m
 ```
 Setelah dijalankan, akan muncul peta interaktif.
-![image](https://hackmd.io/_uploads/Bk81Sa-dzx.png)
+![image](8.png)
 
 ### c. Simpan peta
 ```
@@ -274,7 +272,7 @@ files.download("NO2_Sumenep_Bulanan.csv")
 ```
 file terunduh:
 
-![dataset](NO2_Sumenep_Bulanan.csv)
+![Download Data NO2](NO2_Sumenep_Bulanan.csv)
 
 Hasil pengolahan data NO₂ kemudian dirangkum berdasarkan rata-rata bulanan dan disimpan dalam format CSV. File tersebut digunakan sebagai data hasil analisis dan dapat digunakan kembali untuk visualisasi atau pembuatan dashboard.
 

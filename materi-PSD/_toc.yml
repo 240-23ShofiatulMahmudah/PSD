@@ -4,6 +4,4 @@
 format: jb-book
 root: intro
 chapters:
-- file: markdown
-- file: notebooks
-- file: markdown-notebooks
+- file: Analisis Kadar NO2 melalui Index Kualitas Udara di Wilayah Sumenep

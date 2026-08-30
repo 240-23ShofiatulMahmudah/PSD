@@ -35,7 +35,7 @@ Data NO₂ diperoleh dari Copernicus Data Space Ecosystem menggunakan satelit **
 Sumber: https://dataspace.copernicus.eu/
 
 **Dataset:** 
-![Download Data csv](Dataset.csv)
+[Link](Dataset.csv)
 
 | Keterangan       | Isi                               |
 | ---------------- | --------------------------------- |
@@ -75,7 +75,7 @@ Sumber: https://dataspace.copernicus.eu/
 }
 ```
 
-* ![Download File GeoJSON](AOI_Sumenep.geojson)
+* [Link](AOI_Sumenep.geojson)
 
 ![Peta AOI Sumenep](1.png)
 
@@ -272,7 +272,7 @@ files.download("NO2_Sumenep_Bulanan.csv")
 ```
 file terunduh:
 
-![Download Data NO2](NO2_Sumenep_Bulanan.csv)
+[Link](NO2_Sumenep_Bulanan.csv)
 
 Hasil pengolahan data NO₂ kemudian dirangkum berdasarkan rata-rata bulanan dan disimpan dalam format CSV. File tersebut digunakan sebagai data hasil analisis dan dapat digunakan kembali untuk visualisasi atau pembuatan dashboard.
 

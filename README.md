@@ -1,4 +1,4 @@
-# Penambangan Data - A
+# PROYEK SAINS DATA - B
 Repository ini dibuat untuk Mata Kuliah Proyek Sains Data Kelas B Semester 5, Program Studi Teknik Informatika.
 
 Nama: ShofiatulMahmudah

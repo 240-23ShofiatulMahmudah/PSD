@@ -5,3 +5,4 @@ format: jb-book
 root: intro
 chapters:
 - file: Analisis Kadar NO2 melalui Index Kualitas Udara di Wilayah Sumenep
+- file: Analisis Statistik Dataset Iris Menggunakan PostgreSQL Aiven dan KNIME

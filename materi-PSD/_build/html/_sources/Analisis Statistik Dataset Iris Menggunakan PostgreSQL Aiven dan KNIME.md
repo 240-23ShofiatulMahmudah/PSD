@@ -15,7 +15,9 @@ Dataset Iris merupakan salah satu dataset yang dapat digunakan untuk mempelajari
 6. Melakukan contoh perhitungan statistik secara manual.
 
 ## 3. Dataset Iris
-Dataset yang digunakan dalam tugas ini adalah dataset Iris ( ![dataset](data iris.xlsx)) yang diperoleh dari hasil tugas sebelumnya. Dataset berisi data pengukuran bunga Iris yang terdiri dari beberapa atribut numerik dan satu atribut kategori.
+Dataset yang digunakan dalam tugas ini adalah dataset Iris 
+![dataset](data iris.xlsx)
+ yang diperoleh dari hasil tugas sebelumnya. Dataset berisi data pengukuran bunga Iris yang terdiri dari beberapa atribut numerik dan satu atribut kategori.
 | Bagian                           | Keterangan                                                  |
 | -------------------------------- | ----------------------------------------------------------- |
 | **Jumlah data/baris**            | **150 baris**                                               |
@@ -59,23 +61,25 @@ CREATE TABLE iris (
 Tabel iris dibuat untuk menyimpan data dataset Iris. Setiap kolom disesuaikan dengan atribut yang terdapat pada dataset, sedangkan kolom id digunakan sebagai identitas setiap baris data.
 
 ## 6. Menghubungkan PostgreSQL dengan KNIME
-![image][knime.png]
+
+![image alt](knime.png)
+
 ### 6.1 PostgreSQL Connector
 Node PostgreSQL Connector digunakan untuk membuat koneksi antara KNIME dengan database PostgreSQL yang berada pada Aiven.
 
-![image alt][connector.png]
+![image alt](connector.png)
 ### 6.2 DB Query Reader
 Setelah koneksi berhasil dibuat, node DB Query Reader digunakan untuk mengambil data dari database menggunakan perintah SQL.
 masukkan:
 ```
 SELECT * FROM iris;
 ```
-![image alt][query.png]
+![image alt](query.png)
 
 ## 7. Analisis Statistik Menggunakan KNIME
 ### 7.1 Statistics
 Node Statistics digunakan untuk memperoleh statistik deskriptif dari dataset Iris. Statistik yang dihasilkan digunakan untuk mengetahui karakteristik dan distribusi data pada setiap kolom numerik.
-![image alt][statistik.png]
+![image alt](statistik.png)
 
 ## 8. Hasil Statistik
 | Column           | Min |   Mean | Median | Max | Std. Dev | Skewness | Kurtosis | No. Missing | No. +∞ | No. -∞ |

@@ -113,7 +113,7 @@ m
 
 
 <iframe
-    src="assets/peta_aoi.html"
+    src="peta_aoi.html"
     width="100%"
     height="600"
     style="border:none;">

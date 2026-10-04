@@ -627,7 +627,7 @@ SO2 - auc
 File hasil penggabungan:
 
 
-![reference](data_tsfel_terbaru2.xlsx)
+[link](data_tsfel_terbaru2.xlsx)
 
 
 ---
@@ -664,7 +664,7 @@ Workflow yang digunakan:
 
 Node **Excel Reader** digunakan untuk membaca file hasil penggabungan fitur TSFEL:
 
-![reference](data_tsfel_terbaru2.xlsx)
+[link](data_tsfel_terbaru2.xlsx)
 
 Dataset terdiri dari 19 mahasiswa dengan 274 kolom.
 

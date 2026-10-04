@@ -1,0 +1,1763 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Pengolahan Data Polutan CO, CH₄, NO₂, dan SO₂ di Daerah Guluk-guluk Sumenep Menggunakan Imputasi Polinomial dan Ekstraksi Fitur TSFEL &#8212; Penambangan Data - ShofiatulMahmudah</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Pengolahan Data Polutan CO, CH₄, NO₂, dan SO₂ di Daerah Guluk-guluk Sumenep Menggunakan Imputasi Polinomial dan Ekstraksi Fitur TSFEL';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="ANALISIS KUALITAS UDARA MENGGUNAKAN TSFEL, PCA, DAN K-MEANS CLUSTERING" href="ANALISIS%20KUALITAS%20UDARA%20MENGGUNAKAN%20TSFEL%2C%20PCA%2C%20DAN%20K-MEANS%20CLUSTERING.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/shopi.jpeg" class="logo__image only-light" alt="Penambangan Data - ShofiatulMahmudah - Home"/>
+    <img src="_static/shopi.jpeg" class="logo__image only-dark pst-js-only" alt="Penambangan Data - ShofiatulMahmudah - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Proyek Sains Data - Portfolio Materi
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Analisis%20Kadar%20NO2%20melalui%20Index%20Kualitas%20Udara%20di%20Wilayah%20Sumenep.html">Analisis Kadar NO2 melalui Index Kualitas Udara di Wilayah Sumenep</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Analisis%20Statistik%20Dataset%20Iris%20Menggunakan%20PostgreSQL%20Aiven%20dan%20KNIME.html">Analisis Statistik Dataset Iris Menggunakan PostgreSQL Aiven dan KNIME</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ANALISIS%20KUALITAS%20UDARA%20MENGGUNAKAN%20TSFEL%2C%20PCA%2C%20DAN%20K-MEANS%20CLUSTERING.html">ANALISIS KUALITAS UDARA MENGGUNAKAN TSFEL, PCA, DAN K-MEANS CLUSTERING</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Pengolahan Data Polutan CO, CH₄, NO₂, dan SO₂ di Daerah Guluk-guluk Sumenep Menggunakan Imputasi Polinomial dan Ekstraksi Fitur TSFEL</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FPengolahan Data Polutan CO, CH₄, NO₂, dan SO₂ di Daerah Guluk-guluk Sumenep Menggunakan Imputasi Polinomial dan Ekstraksi Fitur TSFEL.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Pengolahan Data Polutan CO, CH₄, NO₂, dan SO₂ di Daerah Guluk-guluk Sumenep Menggunakan Imputasi Polinomial dan Ekstraksi Fitur TSFEL.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Pengolahan Data Polutan CO, CH₄, NO₂, dan SO₂ di Daerah Guluk-guluk Sumenep Menggunakan Imputasi Polinomial dan Ekstraksi Fitur TSFEL</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-polutan-dan-lokasi-wilayah-pengamatan">1. Data Polutan dan Lokasi Wilayah Pengamatan</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#koordinat-wilayah-pengamatan">Koordinat Wilayah Pengamatan</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kode-koordinat">Kode Koordinat</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kode-folium-untuk-jupyter-book">Kode Folium untuk Jupyter Book</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penanganan-missing-value-imputasi-polinomial">2. Penanganan Missing Value — Imputasi Polinomial</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metode">2.1 Metode</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contoh-perhitungan-manual">2.2 Contoh Perhitungan Manual</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil-imputasi">2.3 Hasil Imputasi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tabel-perbandingan-data-sebelum-dan-sesudah-imputasi">Tabel Perbandingan Data Sebelum dan Sesudah Imputasi</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deteksi-dan-perbaikan-outlier">3. Deteksi dan Perbaikan Outlier</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metode-iqr">3.1 Metode IQR</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jumlah-outlier">3.2 Jumlah Outlier</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tanggal-outlier">3.3 Tanggal Outlier</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tabel-ringkasan-outlier">Tabel Ringkasan Outlier</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perbaikan-outlier">3.4 Perbaikan Outlier</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ekstraksi-fitur-tsfel">4. Ekstraksi Fitur TSFEL</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan">4.1 Tujuan</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#instalasi-dan-persiapan">4.2 Instalasi dan Persiapan</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kode-ekstraksi-fitur">4.3 Kode Ekstraksi Fitur</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#daftar-68-fitur-tsfel">5. Daftar 68 Fitur TSFEL</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pengelompokan-domain-tsfel">Pengelompokan domain TSFEL</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penggabungan-empat-polutan">6. Penggabungan Empat Polutan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deteksi-data-pencilan-outlier-menggunakan-k-means">7. Deteksi Data Pencilan (Outlier) Menggunakan K-Means</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Tujuan</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-knime">Workflow KNIME</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#excel-reader">7.1 Excel Reader</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#column-filter">7.2 Column Filter</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizer">7.3 Normalizer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pca">7.4 PCA</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#k-means">7.5 K-Means</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretasi-hasil-k-means">7.6 Interpretasi Hasil K-Means</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-tahap-k-means">Kesimpulan Tahap K-Means</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#status-pengerjaan">8. Status Pengerjaan</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="pengolahan-data-polutan-co-ch4-no2-dan-so2-di-daerah-guluk-guluk-sumenep-menggunakan-imputasi-polinomial-dan-ekstraksi-fitur-tsfel">
+<h1>Pengolahan Data Polutan CO, CH₄, NO₂, dan SO₂ di Daerah Guluk-guluk Sumenep Menggunakan Imputasi Polinomial dan Ekstraksi Fitur TSFEL<a class="headerlink" href="#pengolahan-data-polutan-co-ch4-no2-dan-so2-di-daerah-guluk-guluk-sumenep-menggunakan-imputasi-polinomial-dan-ekstraksi-fitur-tsfel" title="Link to this heading">#</a></h1>
+<section id="data-polutan-dan-lokasi-wilayah-pengamatan">
+<h2>1. Data Polutan dan Lokasi Wilayah Pengamatan<a class="headerlink" href="#data-polutan-dan-lokasi-wilayah-pengamatan" title="Link to this heading">#</a></h2>
+<p>Data yang digunakan dalam tugas ini terdiri dari <strong>empat polutan</strong>, yaitu:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>No.</p></th>
+<th class="head"><p>Polutan</p></th>
+<th class="head"><p>Data</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>CO</p></td>
+<td><p>Carbon Monoxide</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>CH₄</p></td>
+<td><p>Methane</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>NO₂</p></td>
+<td><p>Nitrogen Dioxide</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>SO₂</p></td>
+<td><p>Sulfur Dioxide</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Data polutan digunakan untuk periode <strong>25 Agustus 2025 sampai 24 Agustus 2026</strong>, sehingga setiap polutan memiliki target <strong>365 data harian</strong>.</p>
+<section id="koordinat-wilayah-pengamatan">
+<h3>Koordinat Wilayah Pengamatan<a class="headerlink" href="#koordinat-wilayah-pengamatan" title="Link to this heading">#</a></h3>
+<p>Wilayah pengamatan yang digunakan pada tugas ini merupakan area polygon dengan titik koordinat berikut. Koordinat pada file peta menggunakan urutan <strong>latitude, longitude</strong>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>No.</p></th>
+<th class="head text-right"><p>Latitude</p></th>
+<th class="head text-right"><p>Longitude</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td class="text-right"><p>-7.050613</p></td>
+<td class="text-right"><p>113.655634</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td class="text-right"><p>-7.066788</p></td>
+<td class="text-right"><p>113.655291</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td class="text-right"><p>-7.075301</p></td>
+<td class="text-right"><p>113.660786</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td class="text-right"><p>-7.077344</p></td>
+<td class="text-right"><p>113.675552</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td class="text-right"><p>-7.073428</p></td>
+<td class="text-right"><p>113.682592</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td class="text-right"><p>-7.056402</p></td>
+<td class="text-right"><p>113.683623</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td class="text-right"><p>-7.049081</p></td>
+<td class="text-right"><p>113.683623</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td class="text-right"><p>-7.045846</p></td>
+<td class="text-right"><p>113.670229</p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td class="text-right"><p>-7.050613</p></td>
+<td class="text-right"><p>113.655634</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Titik ke-9 merupakan <strong>titik penutup polygon</strong>, sehingga sama dengan titik pertama. File peta juga menggunakan titik pusat <strong>latitude -7.06 dan longitude 113.67</strong> dengan zoom level 14.</p>
+</section>
+<section id="kode-koordinat">
+<h3>Kode Koordinat<a class="headerlink" href="#kode-koordinat" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">koordinat_aoi</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="o">-</span><span class="mf">7.050613</span><span class="p">,</span> <span class="mf">113.655634</span><span class="p">],</span>
+    <span class="p">[</span><span class="o">-</span><span class="mf">7.066788</span><span class="p">,</span> <span class="mf">113.655291</span><span class="p">],</span>
+    <span class="p">[</span><span class="o">-</span><span class="mf">7.075301</span><span class="p">,</span> <span class="mf">113.660786</span><span class="p">],</span>
+    <span class="p">[</span><span class="o">-</span><span class="mf">7.077344</span><span class="p">,</span> <span class="mf">113.675552</span><span class="p">],</span>
+    <span class="p">[</span><span class="o">-</span><span class="mf">7.073428</span><span class="p">,</span> <span class="mf">113.682592</span><span class="p">],</span>
+    <span class="p">[</span><span class="o">-</span><span class="mf">7.056402</span><span class="p">,</span> <span class="mf">113.683623</span><span class="p">],</span>
+    <span class="p">[</span><span class="o">-</span><span class="mf">7.049081</span><span class="p">,</span> <span class="mf">113.683623</span><span class="p">],</span>
+    <span class="p">[</span><span class="o">-</span><span class="mf">7.045846</span><span class="p">,</span> <span class="mf">113.670229</span><span class="p">],</span>
+    <span class="p">[</span><span class="o">-</span><span class="mf">7.050613</span><span class="p">,</span> <span class="mf">113.655634</span><span class="p">]</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="kode-folium-untuk-jupyter-book">
+<h3>Kode Folium untuk Jupyter Book<a class="headerlink" href="#kode-folium-untuk-jupyter-book" title="Link to this heading">#</a></h3>
+<p>Kode berikut dapat digunakan untuk menampilkan kembali wilayah pengamatan secara langsung pada Jupyter Book:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">folium</span>
+
+<span class="c1"># Titik pusat wilayah pengamatan</span>
+<span class="n">pusat</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">7.06</span><span class="p">,</span> <span class="mf">113.67</span><span class="p">]</span>
+
+<span class="c1"># Membuat peta</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span>
+    <span class="n">location</span><span class="o">=</span><span class="n">pusat</span><span class="p">,</span>
+    <span class="n">zoom_start</span><span class="o">=</span><span class="mi">14</span>
+<span class="p">)</span>
+
+<span class="c1"># Koordinat wilayah pengamatan</span>
+<span class="n">koordinat_aoi</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="o">-</span><span class="mf">7.050613</span><span class="p">,</span> <span class="mf">113.655634</span><span class="p">],</span>
+    <span class="p">[</span><span class="o">-</span><span class="mf">7.066788</span><span class="p">,</span> <span class="mf">113.655291</span><span class="p">],</span>
+    <span class="p">[</span><span class="o">-</span><span class="mf">7.075301</span><span class="p">,</span> <span class="mf">113.660786</span><span class="p">],</span>
+    <span class="p">[</span><span class="o">-</span><span class="mf">7.077344</span><span class="p">,</span> <span class="mf">113.675552</span><span class="p">],</span>
+    <span class="p">[</span><span class="o">-</span><span class="mf">7.073428</span><span class="p">,</span> <span class="mf">113.682592</span><span class="p">],</span>
+    <span class="p">[</span><span class="o">-</span><span class="mf">7.049081</span><span class="p">,</span> <span class="mf">113.683623</span><span class="p">],</span>
+    <span class="p">[</span><span class="o">-</span><span class="mf">7.045846</span><span class="p">,</span> <span class="mf">113.670229</span><span class="p">],</span>
+    <span class="p">[</span><span class="o">-</span><span class="mf">7.050613</span><span class="p">,</span> <span class="mf">113.655634</span><span class="p">]</span>
+<span class="p">]</span>
+
+<span class="c1"># Polygon wilayah pengamatan</span>
+<span class="n">folium</span><span class="o">.</span><span class="n">Polygon</span><span class="p">(</span>
+    <span class="n">locations</span><span class="o">=</span><span class="n">koordinat_aoi</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span>
+    <span class="n">weight</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">fill</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">fill_color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span>
+    <span class="n">fill_opacity</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+    <span class="n">tooltip</span><span class="o">=</span><span class="s2">&quot;Wilayah Pengamatan&quot;</span>
+<span class="p">)</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+
+<span class="c1"># Titik pusat pengamatan</span>
+<span class="n">folium</span><span class="o">.</span><span class="n">Marker</span><span class="p">(</span>
+    <span class="n">pusat</span><span class="p">,</span>
+    <span class="n">tooltip</span><span class="o">=</span><span class="s2">&quot;Titik Pengamatan&quot;</span>
+<span class="p">)</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+
+<span class="n">m</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="penanganan-missing-value-imputasi-polinomial">
+<h2>2. Penanganan Missing Value — Imputasi Polinomial<a class="headerlink" href="#penanganan-missing-value-imputasi-polinomial" title="Link to this heading">#</a></h2>
+<section id="metode">
+<h3>2.1 Metode<a class="headerlink" href="#metode" title="Link to this heading">#</a></h3>
+<p>Sesuai perubahan instruksi tugas, metode pengisian missing value yang sebelumnya menggunakan <strong>interpolasi linier diganti sepenuhnya dengan interpolasi polinomial</strong>.</p>
+<p>Data disusun menjadi <strong>365 hari</strong>, kemudian nilai yang hilang diestimasi berdasarkan pola data menggunakan polinomial orde 2.</p>
+<p>Bentuk umum polinomial orde 2:</p>
+<p><span class="math notranslate nohighlight">\([
+y = ax^2 + bx + c
+]\)</span></p>
+<p>Keterangan:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Simbol</p></th>
+<th class="head"><p>Keterangan</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\((y)\)</span></p></td>
+<td><p>Nilai yang diperkirakan</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\((x)\)</span></p></td>
+<td><p>Posisi/waktu</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\((a)\)</span></p></td>
+<td><p>Koefisien <span class="math notranslate nohighlight">\((x^2)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\((b)\)</span></p></td>
+<td><p>Koefisien <span class="math notranslate nohighlight">\((x)\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\((c)\)</span></p></td>
+<td><p>Konstanta</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Dalam Python digunakan:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Rata-rata (Mean)&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Rata-rata (Mean)&quot;</span><span class="p">]</span>
+    <span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;polynomial&quot;</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="contoh-perhitungan-manual">
+<h3>2.2 Contoh Perhitungan Manual<a class="headerlink" href="#contoh-perhitungan-manual" title="Link to this heading">#</a></h3>
+<p>Misalkan terdapat tiga data:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-right"><p>x</p></th>
+<th class="head text-right"><p>y</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-right"><p>1</p></td>
+<td class="text-right"><p>4</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>2</p></td>
+<td class="text-right"><p>9</p></td>
+</tr>
+<tr class="row-even"><td class="text-right"><p>3</p></td>
+<td class="text-right"><p>16</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Model polinomial:</p>
+<p><span class="math notranslate nohighlight">\([y=ax^2+bx+c]\)</span></p>
+<p>Substitusi data pertama:</p>
+<p><span class="math notranslate nohighlight">\([4=a+b+c]\)</span></p>
+<p>Data kedua:</p>
+<p><span class="math notranslate nohighlight">\([9=4a+2b+c]\)</span></p>
+<p>Data ketiga:</p>
+<p><span class="math notranslate nohighlight">\([16=9a+3b+c]\)</span></p>
+<p>Dari penyelesaian ketiga persamaan diperoleh:</p>
+<p><span class="math notranslate nohighlight">\([a=1,quad b=2,quad c=1]\)</span></p>
+<p>Sehingga persamaannya:</p>
+<p><span class="math notranslate nohighlight">\([y=x^2+2x+1
+]\)</span></p>
+<p>Jika nilai pada (x=2.5) hilang:</p>
+<p><span class="math notranslate nohighlight">\([y=(2.5)^2+2(2.5)+1
+]\)</span></p>
+<p><span class="math notranslate nohighlight">\([y=6.25+5+1
+]\)</span></p>
+<p><span class="math notranslate nohighlight">\([boxed{y=12.25}
+]\)</span></p>
+<p>Jadi nilai yang hilang pada (x=2.5) diperkirakan sebesar <strong>12.25</strong>.</p>
+</section>
+<section id="hasil-imputasi">
+<h3>2.3 Hasil Imputasi<a class="headerlink" href="#hasil-imputasi" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Polutan</p></th>
+<th class="head text-right"><p>Jumlah Data</p></th>
+<th class="head text-right"><p>NaN Setelah Imputasi</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CO</p></td>
+<td class="text-right"><p>365</p></td>
+<td class="text-right"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>CH₄</p></td>
+<td class="text-right"><p>365</p></td>
+<td class="text-right"><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>NO₂</p></td>
+<td class="text-right"><p>365</p></td>
+<td class="text-right"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>SO₂</p></td>
+<td class="text-right"><p>365</p></td>
+<td class="text-right"><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="tabel-perbandingan-data-sebelum-dan-sesudah-imputasi">
+<h3>Tabel Perbandingan Data Sebelum dan Sesudah Imputasi<a class="headerlink" href="#tabel-perbandingan-data-sebelum-dan-sesudah-imputasi" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Polutan</p></th>
+<th class="head text-right"><p>Jumlah Data Sebelum</p></th>
+<th class="head text-right"><p>Missing Sebelum</p></th>
+<th class="head text-right"><p>Jumlah Data Sesudah</p></th>
+<th class="head text-right"><p>Missing Sesudah</p></th>
+<th class="head"><p>Metode Imputasi</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>CO</strong></p></td>
+<td class="text-right"><p>191</p></td>
+<td class="text-right"><p>0</p></td>
+<td class="text-right"><p>365</p></td>
+<td class="text-right"><p>0</p></td>
+<td><p>Polynomial</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>CH₄</strong></p></td>
+<td class="text-right"><p>21</p></td>
+<td class="text-right"><p>0</p></td>
+<td class="text-right"><p>365</p></td>
+<td class="text-right"><p>0</p></td>
+<td><p>Polynomial</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>NO₂</strong></p></td>
+<td class="text-right"><p>153</p></td>
+<td class="text-right"><p>0</p></td>
+<td class="text-right"><p>365</p></td>
+<td class="text-right"><p>0</p></td>
+<td><p>Polynomial</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>SO₂</strong></p></td>
+<td class="text-right"><p>199</p></td>
+<td class="text-right"><p>0</p></td>
+<td class="text-right"><p>365</p></td>
+<td class="text-right"><p>0</p></td>
+<td><p>Polynomial</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><img alt="image alt" src="_images/co.png" />
+<img alt="image alt" src="_images/ch4.png" />
+<img alt="image alt" src="_images/no2.png" />
+<img alt="image alt" src="_images/so2.png" /></p>
+</section>
+</section>
+<section id="deteksi-dan-perbaikan-outlier">
+<h2>3. Deteksi dan Perbaikan Outlier<a class="headerlink" href="#deteksi-dan-perbaikan-outlier" title="Link to this heading">#</a></h2>
+<section id="metode-iqr">
+<h3>3.1 Metode IQR<a class="headerlink" href="#metode-iqr" title="Link to this heading">#</a></h3>
+<p>Outlier dideteksi menggunakan <strong>Interquartile Range (IQR)</strong>.</p>
+<p>Rumus:</p>
+<p><span class="math notranslate nohighlight">\([IQR=Q3-Q1
+]\)</span></p>
+<p>Batas bawah:</p>
+<p><span class="math notranslate nohighlight">\([Lower=Q1-1.5(IQR)
+]\)</span></p>
+<p>Batas atas:</p>
+<p><span class="math notranslate nohighlight">\([Upper=Q3+1.5(IQR)
+]\)</span></p>
+<p>Nilai yang berada di bawah batas bawah atau di atas batas atas dianggap sebagai outlier.</p>
+</section>
+<section id="jumlah-outlier">
+<h3>3.2 Jumlah Outlier<a class="headerlink" href="#jumlah-outlier" title="Link to this heading">#</a></h3>
+<p>Hasil deteksi pada dataset hasil preprocessing polinomial:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Polutan</p></th>
+<th class="head text-right"><p>Jumlah Outlier</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CO</p></td>
+<td class="text-right"><p><strong>27</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>CH₄</p></td>
+<td class="text-right"><p><strong>0</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>NO₂</p></td>
+<td class="text-right"><p><strong>28</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>SO₂</p></td>
+<td class="text-right"><p><strong>24</strong></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="tanggal-outlier">
+<h3>3.3 Tanggal Outlier<a class="headerlink" href="#tanggal-outlier" title="Link to this heading">#</a></h3>
+<p>Tanggal outlier diperoleh langsung dari dataset menggunakan kode berikut:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">cek_outlier</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">nama_kolom</span><span class="p">,</span> <span class="n">nama_polutan</span><span class="p">):</span>
+
+    <span class="n">Q1</span> <span class="o">=</span> <span class="n">df</span><span class="err">$</span><span class="p">[</span><span class="n">ama_kolom</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span>
+    <span class="n">Q3</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">nama_kolom</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span>
+    <span class="n">IQR</span> <span class="o">=</span> <span class="n">Q3</span> <span class="o">-</span> <span class="n">Q1</span>
+
+    <span class="n">batas_bawah</span> <span class="o">=</span> <span class="n">Q1</span> <span class="o">-</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">IQR</span>
+    <span class="n">batas_atas</span> <span class="o">=</span> <span class="n">Q3</span> <span class="o">+</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">IQR</span>
+
+    <span class="n">outlier</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span>
+        <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">nama_kolom</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">batas_bawah</span><span class="p">)</span> <span class="o">|</span>
+        <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">nama_kolom</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">batas_atas</span><span class="p">)</span>
+    <span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="n">outlier</span><span class="p">[</span><span class="s2">&quot;Polutan&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nama_polutan</span>
+
+    <span class="k">return</span> <span class="n">outlier</span><span class="p">[</span>
+        <span class="p">[</span><span class="s2">&quot;Polutan&quot;</span><span class="p">,</span> <span class="s2">&quot;Tanggal&quot;</span><span class="p">,</span> <span class="n">nama_kolom</span><span class="p">]</span>
+    <span class="p">]</span>
+
+
+<span class="n">outlier_co</span> <span class="o">=</span> <span class="n">cek_outlier</span><span class="p">(</span>
+    <span class="n">df_co</span><span class="p">,</span> <span class="s2">&quot;Rata-rata (Mean)&quot;</span><span class="p">,</span> <span class="s2">&quot;CO&quot;</span>
+<span class="p">)</span>
+
+<span class="n">outlier_ch4</span> <span class="o">=</span> <span class="n">cek_outlier</span><span class="p">(</span>
+    <span class="n">df_ch4</span><span class="p">,</span> <span class="s2">&quot;Rata-rata (Mean)&quot;</span><span class="p">,</span> <span class="s2">&quot;CH4&quot;</span>
+<span class="p">)</span>
+
+<span class="n">outlier_no2</span> <span class="o">=</span> <span class="n">cek_outlier</span><span class="p">(</span>
+    <span class="n">df_no2</span><span class="p">,</span> <span class="s2">&quot;Rata-rata (Mean)&quot;</span><span class="p">,</span> <span class="s2">&quot;NO2&quot;</span>
+<span class="p">)</span>
+
+<span class="n">outlier_so2</span> <span class="o">=</span> <span class="n">cek_outlier</span><span class="p">(</span>
+    <span class="n">df_so2</span><span class="p">,</span> <span class="s2">&quot;Rata-rata (Mean)&quot;</span><span class="p">,</span> <span class="s2">&quot;SO2&quot;</span>
+<span class="p">)</span>
+
+<span class="n">tabel_outlier</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="n">outlier_co</span><span class="p">,</span>
+        <span class="n">outlier_ch4</span><span class="p">,</span>
+        <span class="n">outlier_no2</span><span class="p">,</span>
+        <span class="n">outlier_so2</span>
+    <span class="p">],</span>
+    <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">tabel_outlier</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Untuk mendapatkan daftar tanggal saja:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">polutan</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">&quot;CO&quot;</span><span class="p">,</span> <span class="n">outlier_co</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;CH4&quot;</span><span class="p">,</span> <span class="n">outlier_ch4</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;NO2&quot;</span><span class="p">,</span> <span class="n">outlier_no2</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;SO2&quot;</span><span class="p">,</span> <span class="n">outlier_so2</span><span class="p">)</span>
+<span class="p">]:</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;n&quot;</span><span class="p">,</span> <span class="n">polutan</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;Tanggal&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+</pre></div>
+</div>
+</section>
+<section id="tabel-ringkasan-outlier">
+<h3>Tabel Ringkasan Outlier<a class="headerlink" href="#tabel-ringkasan-outlier" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Polutan</p></th>
+<th class="head text-right"><p>Total Outlier</p></th>
+<th class="head"><p>Tanggal</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CO</p></td>
+<td class="text-right"><p>27</p></td>
+<td><p>Dihasilkan dari <code class="docutils literal notranslate"><span class="pre">outlier_co</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>CH₄</p></td>
+<td class="text-right"><p>0</p></td>
+<td><p>Tidak ada</p></td>
+</tr>
+<tr class="row-even"><td><p>NO₂</p></td>
+<td class="text-right"><p>28</p></td>
+<td><p>Dihasilkan dari <code class="docutils literal notranslate"><span class="pre">outlier_no2</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>SO₂</p></td>
+<td class="text-right"><p>24</p></td>
+<td><p>Dihasilkan dari <code class="docutils literal notranslate"><span class="pre">outlier_so2</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Kode tersebut sengaja digunakan agar <strong>tanggal yang tercatat di laporan benar-benar sama dengan dataset revisi polinomial</strong>, bukan menggunakan hasil lama dari metode linier.</p>
+</section>
+<section id="perbaikan-outlier">
+<h3>3.4 Perbaikan Outlier<a class="headerlink" href="#perbaikan-outlier" title="Link to this heading">#</a></h3>
+<p>Outlier kemudian ditandai sebagai <code class="docutils literal notranslate"><span class="pre">NaN</span></code> dan diisi kembali menggunakan interpolasi polinomial:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">perbaiki_outlier_polynomial</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="n">Q1</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Rata-rata (Mean)&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span>
+    <span class="n">Q3</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Rata-rata (Mean)&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span>
+    <span class="n">IQR</span> <span class="o">=</span> <span class="n">Q3</span> <span class="o">-</span> <span class="n">Q1</span>
+
+    <span class="n">lower</span> <span class="o">=</span> <span class="n">Q1</span> <span class="o">-</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">IQR</span>
+    <span class="n">upper</span> <span class="o">=</span> <span class="n">Q3</span> <span class="o">+</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">IQR</span>
+
+    <span class="n">kondisi_outlier</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Rata-rata (Mean)&quot;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">lower</span><span class="p">)</span> <span class="o">|</span>
+        <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Rata-rata (Mean)&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">upper</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
+        <span class="n">kondisi_outlier</span><span class="p">,</span>
+        <span class="s2">&quot;Rata-rata (Mean)&quot;</span>
+    <span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Rata-rata (Mean)&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Rata-rata (Mean)&quot;</span><span class="p">]</span>
+        <span class="o">.</span><span class="n">interpolate</span><span class="p">(</span>
+            <span class="n">method</span><span class="o">=</span><span class="s2">&quot;polynomial&quot;</span><span class="p">,</span>
+            <span class="n">order</span><span class="o">=</span><span class="mi">2</span>
+        <span class="p">)</span>
+        <span class="o">.</span><span class="n">bfill</span><span class="p">()</span>
+        <span class="o">.</span><span class="n">ffill</span><span class="p">()</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">df</span>
+</pre></div>
+</div>
+<p>Setelah perbaikan, data tetap memiliki <strong>365 hari</strong> dan tidak memiliki missing value.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="ekstraksi-fitur-tsfel">
+<h2>4. Ekstraksi Fitur TSFEL<a class="headerlink" href="#ekstraksi-fitur-tsfel" title="Link to this heading">#</a></h2>
+<section id="tujuan">
+<h3>4.1 Tujuan<a class="headerlink" href="#tujuan" title="Link to this heading">#</a></h3>
+<p>Dataset setiap polutan terdiri dari <strong>365 nilai time series harian</strong>.</p>
+<p>TSFEL digunakan untuk mengubah time series tersebut menjadi sejumlah karakteristik atau fitur numerik.</p>
+<p>Ekstraksi dilakukan pada <strong>dataset hasil imputasi dan perbaikan outlier menggunakan metode polinomial</strong>.</p>
+<p>Setiap polutan menghasilkan:</p>
+<p><span class="math notranslate nohighlight">\([
+68text{ fitur}
+]\)</span>
+Dengan empat polutan:</p>
+<p><span class="math notranslate nohighlight">\([
+4times68=boxed{272text{ fitur}}
+]\)</span></p>
+</section>
+<section id="instalasi-dan-persiapan">
+<h3>4.2 Instalasi dan Persiapan<a class="headerlink" href="#instalasi-dan-persiapan" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">tsfel</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tsfel</span>
+
+<span class="n">cfg</span> <span class="o">=</span> <span class="n">tsfel</span><span class="o">.</span><span class="n">get_features_by_domain</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Contoh membaca data:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df_co</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span>
+    <span class="s2">&quot;CO_clean_polynomial.xlsx&quot;</span>
+<span class="p">)</span>
+
+<span class="n">data_co</span> <span class="o">=</span> <span class="n">df_co</span><span class="p">[</span>
+    <span class="s2">&quot;Rata-rata (Mean)&quot;</span>
+<span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Pengecekan:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Jumlah data:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">data_co</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;NaN:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">data_co</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Inf:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">isinf</span><span class="p">(</span><span class="n">data_co</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>Target:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Jumlah data: 365
+NaN: 0
+Inf: 0
+</pre></div>
+</div>
+</section>
+<section id="kode-ekstraksi-fitur">
+<h3>4.3 Kode Ekstraksi Fitur<a class="headerlink" href="#kode-ekstraksi-fitur" title="Link to this heading">#</a></h3>
+<p>Fungsi berikut digunakan untuk mengambil fitur TSFEL:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">ambil_fitur</span><span class="p">(</span>
+    <span class="n">cfg</span><span class="p">,</span>
+    <span class="n">domain</span><span class="p">,</span>
+    <span class="n">nama_tsfel</span><span class="p">,</span>
+    <span class="n">data</span>
+<span class="p">):</span>
+    <span class="n">detail</span> <span class="o">=</span> <span class="n">cfg</span><span class="p">[</span><span class="n">domain</span><span class="p">][</span><span class="n">nama_tsfel</span><span class="p">]</span>
+
+    <span class="n">fungsi</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">detail</span><span class="p">[</span><span class="s2">&quot;function&quot;</span><span class="p">])</span>
+    <span class="n">parameter</span> <span class="o">=</span> <span class="n">detail</span><span class="p">[</span><span class="s2">&quot;parameters&quot;</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">parameter</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="n">nilai</span> <span class="o">=</span> <span class="n">fungsi</span><span class="p">(</span>
+            <span class="n">data</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">parameter</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">nilai</span> <span class="o">=</span> <span class="n">fungsi</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">nilai</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="n">nilai</span> <span class="o">=</span> <span class="n">nilai</span><span class="p">[</span><span class="s2">&quot;values&quot;</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span>
+                <span class="n">nilai</span><span class="p">,</span>
+                <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<p>Contoh penggunaan:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hasil_co</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="n">hasil_co</span><span class="p">[</span><span class="s2">&quot;f1_abs_energy&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ambil_fitur</span><span class="p">(</span>
+    <span class="n">cfg</span><span class="p">,</span>
+    <span class="s2">&quot;statistical&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Absolute energy&quot;</span><span class="p">,</span>
+    <span class="n">data_co</span>
+<span class="p">)</span>
+
+<span class="n">hasil_co</span><span class="p">[</span><span class="s2">&quot;f2_auc&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ambil_fitur</span><span class="p">(</span>
+    <span class="n">cfg</span><span class="p">,</span>
+    <span class="s2">&quot;temporal&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Area under the curve&quot;</span><span class="p">,</span>
+    <span class="n">data_co</span>
+<span class="p">)</span>
+
+<span class="n">hasil_co</span><span class="p">[</span><span class="s2">&quot;f3_autocorr&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ambil_fitur</span><span class="p">(</span>
+    <span class="n">cfg</span><span class="p">,</span>
+    <span class="s2">&quot;temporal&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Autocorrelation&quot;</span><span class="p">,</span>
+    <span class="n">data_co</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Fitur khusus seperti <code class="docutils literal notranslate"><span class="pre">ECDF</span></code>, <code class="docutils literal notranslate"><span class="pre">ECDF</span> <span class="pre">slope</span></code>, <code class="docutils literal notranslate"><span class="pre">LPCC</span></code>, <code class="docutils literal notranslate"><span class="pre">MFCC</span></code>, <code class="docutils literal notranslate"><span class="pre">Spectrogram</span> <span class="pre">mean</span> <span class="pre">coefficient</span></code>, dan fitur wavelet diproses sesuai bentuk output TSFEL. Jika menghasilkan beberapa nilai, digunakan <strong>rata-rata nilai keluaran</strong> agar satu fitur direpresentasikan sebagai satu kolom.</p>
+<p>Setelah semua fitur diperoleh:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hasil_co</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">[[</span>
+        <span class="n">hasil_co</span><span class="p">[</span><span class="n">nama</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">nama</span> <span class="ow">in</span> <span class="n">nama_fitur_68</span>
+    <span class="p">]],</span>
+    <span class="n">columns</span><span class="o">=</span><span class="n">nama_fitur_68</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Jumlah fitur:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">hasil_co</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Jumlah baris:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">hasil_co</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="s2">&quot;Jumlah NaN:&quot;</span><span class="p">,</span>
+    <span class="n">hasil_co</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Hasil:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Jumlah fitur: 68
+Jumlah baris: 1
+Jumlah NaN: 0
+</pre></div>
+</div>
+<p>Prosedur yang sama diterapkan pada CH₄, NO₂, dan SO₂.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="daftar-68-fitur-tsfel">
+<h2>5. Daftar 68 Fitur TSFEL<a class="headerlink" href="#daftar-68-fitur-tsfel" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-right"><p>No</p></th>
+<th class="head"><p>Nama Fitur</p></th>
+<th class="head text-right"><p>No</p></th>
+<th class="head"><p>Nama Fitur</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-right"><p>f1</p></td>
+<td><p>abs_energy</p></td>
+<td class="text-right"><p>f35</p></td>
+<td><p>median_abs_diff</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>f2</p></td>
+<td><p>auc</p></td>
+<td class="text-right"><p>f36</p></td>
+<td><p>median_diff</p></td>
+</tr>
+<tr class="row-even"><td class="text-right"><p>f3</p></td>
+<td><p>autocorr</p></td>
+<td class="text-right"><p>f37</p></td>
+<td><p>median_frequency</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>f4</p></td>
+<td><p>average_power</p></td>
+<td class="text-right"><p>f38</p></td>
+<td><p>mfcc</p></td>
+</tr>
+<tr class="row-even"><td class="text-right"><p>f5</p></td>
+<td><p>calc_centroid</p></td>
+<td class="text-right"><p>f39</p></td>
+<td><p>mse</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>f6</p></td>
+<td><p>calc_max</p></td>
+<td class="text-right"><p>f40</p></td>
+<td><p>negative_turning</p></td>
+</tr>
+<tr class="row-even"><td class="text-right"><p>f7</p></td>
+<td><p>calc_mean</p></td>
+<td class="text-right"><p>f41</p></td>
+<td><p>neighbourhood_peaks</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>f8</p></td>
+<td><p>calc_median</p></td>
+<td class="text-right"><p>f42</p></td>
+<td><p>petrosian_fractal_dimension</p></td>
+</tr>
+<tr class="row-even"><td class="text-right"><p>f9</p></td>
+<td><p>calc_min</p></td>
+<td class="text-right"><p>f43</p></td>
+<td><p>pk_pk_distance</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>f10</p></td>
+<td><p>calc_std</p></td>
+<td class="text-right"><p>f44</p></td>
+<td><p>positive_turning</p></td>
+</tr>
+<tr class="row-even"><td class="text-right"><p>f11</p></td>
+<td><p>calc_var</p></td>
+<td class="text-right"><p>f45</p></td>
+<td><p>power_bandwidth</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>f12</p></td>
+<td><p>dfa</p></td>
+<td class="text-right"><p>f46</p></td>
+<td><p>rms</p></td>
+</tr>
+<tr class="row-even"><td class="text-right"><p>f13</p></td>
+<td><p>distance</p></td>
+<td class="text-right"><p>f47</p></td>
+<td><p>skewness</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>f14</p></td>
+<td><p>ecdf</p></td>
+<td class="text-right"><p>f48</p></td>
+<td><p>slope</p></td>
+</tr>
+<tr class="row-even"><td class="text-right"><p>f15</p></td>
+<td><p>ecdf_percentile</p></td>
+<td class="text-right"><p>f49</p></td>
+<td><p>spectral_centroid</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>f16</p></td>
+<td><p>ecdf_percentile_count</p></td>
+<td class="text-right"><p>f50</p></td>
+<td><p>spectral_decrease</p></td>
+</tr>
+<tr class="row-even"><td class="text-right"><p>f17</p></td>
+<td><p>ecdf_slope</p></td>
+<td class="text-right"><p>f51</p></td>
+<td><p>spectral_distance</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>f18</p></td>
+<td><p>entropy</p></td>
+<td class="text-right"><p>f52</p></td>
+<td><p>spectral_entropy</p></td>
+</tr>
+<tr class="row-even"><td class="text-right"><p>f19</p></td>
+<td><p>fundamental_frequency</p></td>
+<td class="text-right"><p>f53</p></td>
+<td><p>spectral_kurtosis</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>f20</p></td>
+<td><p>higuchi_fractal_dimension</p></td>
+<td class="text-right"><p>f54</p></td>
+<td><p>spectral_positive_turning</p></td>
+</tr>
+<tr class="row-even"><td class="text-right"><p>f21</p></td>
+<td><p>hist_mode</p></td>
+<td class="text-right"><p>f55</p></td>
+<td><p>spectral_roll_off</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>f22</p></td>
+<td><p>human_range_energy</p></td>
+<td class="text-right"><p>f56</p></td>
+<td><p>spectral_roll_on</p></td>
+</tr>
+<tr class="row-even"><td class="text-right"><p>f23</p></td>
+<td><p>hurst_exponent</p></td>
+<td class="text-right"><p>f57</p></td>
+<td><p>spectral_skewness</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>f24</p></td>
+<td><p>interq_range</p></td>
+<td class="text-right"><p>f58</p></td>
+<td><p>spectral_slope</p></td>
+</tr>
+<tr class="row-even"><td class="text-right"><p>f25</p></td>
+<td><p>kurtosis</p></td>
+<td class="text-right"><p>f59</p></td>
+<td><p>spectral_spread</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>f26</p></td>
+<td><p>lempel_ziv</p></td>
+<td class="text-right"><p>f60</p></td>
+<td><p>spectral_variation</p></td>
+</tr>
+<tr class="row-even"><td class="text-right"><p>f27</p></td>
+<td><p>lpcc</p></td>
+<td class="text-right"><p>f61</p></td>
+<td><p>spectrogram_mean_coeff</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>f28</p></td>
+<td><p>max_frequency</p></td>
+<td class="text-right"><p>f62</p></td>
+<td><p>sum_abs_diff</p></td>
+</tr>
+<tr class="row-even"><td class="text-right"><p>f29</p></td>
+<td><p>max_power_spectrum</p></td>
+<td class="text-right"><p>f63</p></td>
+<td><p>wavelet_abs_mean</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>f30</p></td>
+<td><p>maximum_fractal_length</p></td>
+<td class="text-right"><p>f64</p></td>
+<td><p>wavelet_energy</p></td>
+</tr>
+<tr class="row-even"><td class="text-right"><p>f31</p></td>
+<td><p>mean_abs_deviation</p></td>
+<td class="text-right"><p>f65</p></td>
+<td><p>wavelet_entropy</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>f32</p></td>
+<td><p>mean_abs_diff</p></td>
+<td class="text-right"><p>f66</p></td>
+<td><p>wavelet_std</p></td>
+</tr>
+<tr class="row-even"><td class="text-right"><p>f33</p></td>
+<td><p>mean_diff</p></td>
+<td class="text-right"><p>f67</p></td>
+<td><p>wavelet_var</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>f34</p></td>
+<td><p>median_abs_deviation</p></td>
+<td class="text-right"><p>f68</p></td>
+<td><p>zero_cross</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="pengelompokan-domain-tsfel">
+<h3>Pengelompokan domain TSFEL<a class="headerlink" href="#pengelompokan-domain-tsfel" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Domain</p></th>
+<th class="head"><p>Contoh Fitur</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Statistical</p></td>
+<td><p>mean, median, variance, kurtosis, skewness</p></td>
+</tr>
+<tr class="row-odd"><td><p>Temporal</p></td>
+<td><p>autocorrelation, slope, turning points, differences</p></td>
+</tr>
+<tr class="row-even"><td><p>Spectral</p></td>
+<td><p>frequency, spectral entropy, MFCC, LPCC</p></td>
+</tr>
+<tr class="row-odd"><td><p>Fractal</p></td>
+<td><p>DFA, Hurst exponent, Higuchi, Petrosian</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="penggabungan-empat-polutan">
+<h2>6. Penggabungan Empat Polutan<a class="headerlink" href="#penggabungan-empat-polutan" title="Link to this heading">#</a></h2>
+<p>Setelah masing-masing polutan menghasilkan 68 fitur, seluruh fitur digabungkan.</p>
+<p><span class="math notranslate nohighlight">\([
+68_{CO}+68_{CH4}+68_{NO2}+68_{SO2}
+=272
+]\)</span></p>
+<p>Dataset akhir satu kelas terdiri dari:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Komponen</p></th>
+<th class="head text-right"><p>Jumlah</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Mahasiswa</p></td>
+<td class="text-right"><p>19</p></td>
+</tr>
+<tr class="row-odd"><td><p>Kolom identitas</p></td>
+<td class="text-right"><p>2</p></td>
+</tr>
+<tr class="row-even"><td><p>Fitur CO</p></td>
+<td class="text-right"><p>68</p></td>
+</tr>
+<tr class="row-odd"><td><p>Fitur CH₄</p></td>
+<td class="text-right"><p>68</p></td>
+</tr>
+<tr class="row-even"><td><p>Fitur NO₂</p></td>
+<td class="text-right"><p>68</p></td>
+</tr>
+<tr class="row-odd"><td><p>Fitur SO₂</p></td>
+<td class="text-right"><p>68</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Total fitur numerik</strong></p></td>
+<td class="text-right"><p><strong>272</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Total kolom</strong></p></td>
+<td class="text-right"><p><strong>274</strong></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Kolom identitas:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Nama</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Daerah</span></code></p></li>
+</ul>
+<p>Contoh nama fitur:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>CO - abs_energy
+CO - auc
+...
+CH4 - abs_energy
+CH4 - auc
+...
+NO2 - abs_energy
+NO2 - auc
+...
+SO2 - abs_energy
+SO2 - auc
+...
+</pre></div>
+</div>
+<p>File hasil penggabungan:</p>
+<p><img alt="reference" src="_images/data_tsfel_terbaru2.xlsx" /></p>
+</section>
+<hr class="docutils" />
+<section id="deteksi-data-pencilan-outlier-menggunakan-k-means">
+<h2>7. Deteksi Data Pencilan (Outlier) Menggunakan K-Means<a class="headerlink" href="#deteksi-data-pencilan-outlier-menggunakan-k-means" title="Link to this heading">#</a></h2>
+<p>Setelah dilakukan imputasi polynomial, perbaikan outlier pada data harian masing-masing polutan, dan ekstraksi fitur menggunakan TSFEL, seluruh hasil fitur dari 4 polutan digabungkan menjadi satu dataset.</p>
+<p>Dataset gabungan memiliki:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Keterangan</p></th>
+<th class="head text-right"><p>Jumlah</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Mahasiswa</p></td>
+<td class="text-right"><p>19</p></td>
+</tr>
+<tr class="row-odd"><td><p>Fitur per polutan</p></td>
+<td class="text-right"><p>68</p></td>
+</tr>
+<tr class="row-even"><td><p>Jumlah polutan</p></td>
+<td class="text-right"><p>4</p></td>
+</tr>
+<tr class="row-odd"><td><p>Total fitur TSFEL</p></td>
+<td class="text-right"><p>272</p></td>
+</tr>
+<tr class="row-even"><td><p>Kolom identitas</p></td>
+<td class="text-right"><p>2 (<code class="docutils literal notranslate"><span class="pre">Nama</span></code>, <code class="docutils literal notranslate"><span class="pre">Daerah</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Total kolom</p></td>
+<td class="text-right"><p>274</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="id1">
+<h3>Tujuan<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>Tahap ini dilakukan untuk mendeteksi kembali data yang memiliki pola berbeda pada tingkat mahasiswa. Data yang digunakan bukan lagi data harian masing-masing polutan, tetapi hasil ekstraksi 272 fitur TSFEL dari 4 polutan.</p>
+<p>Algoritma yang digunakan adalah <strong>K-Means</strong> pada software <strong>KNIME</strong>.</p>
+</section>
+<section id="workflow-knime">
+<h3>Workflow KNIME<a class="headerlink" href="#workflow-knime" title="Link to this heading">#</a></h3>
+<p>Workflow yang digunakan:</p>
+<p>![image alt][cluster2.png]</p>
+</section>
+<section id="excel-reader">
+<h3>7.1 Excel Reader<a class="headerlink" href="#excel-reader" title="Link to this heading">#</a></h3>
+<p>Node <strong>Excel Reader</strong> digunakan untuk membaca file hasil penggabungan fitur TSFEL:</p>
+<p><img alt="reference" src="_images/data_tsfel_terbaru2.xlsx" /></p>
+<p>Dataset terdiri dari 19 mahasiswa dengan 274 kolom.</p>
+</section>
+<section id="column-filter">
+<h3>7.2 Column Filter<a class="headerlink" href="#column-filter" title="Link to this heading">#</a></h3>
+<p>Node <strong>Column Filter</strong> digunakan untuk memisahkan kolom identitas dengan fitur numerik.</p>
+<p>Kolom yang tidak digunakan dalam proses perhitungan:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Nama</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Daerah</span></code></p></li>
+</ul>
+<p>Kolom yang digunakan adalah 272 fitur TSFEL dari 4 polutan.</p>
+</section>
+<section id="normalizer">
+<h3>7.3 Normalizer<a class="headerlink" href="#normalizer" title="Link to this heading">#</a></h3>
+<p>Normalisasi dilakukan sebelum PCA agar setiap fitur memiliki skala yang sebanding.</p>
+<p>Metode yang digunakan adalah <strong>Z-Score Standardization</strong>.</p>
+<p>Rumus:</p>
+<p>z = (x - μ) / σ</p>
+<p>Keterangan:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Simbol</p></th>
+<th class="head"><p>Keterangan</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>x</p></td>
+<td><p>nilai data</p></td>
+</tr>
+<tr class="row-odd"><td><p>μ</p></td>
+<td><p>rata-rata data</p></td>
+</tr>
+<tr class="row-even"><td><p>σ</p></td>
+<td><p>standar deviasi</p></td>
+</tr>
+<tr class="row-odd"><td><p>z</p></td>
+<td><p>nilai data setelah standardisasi</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="pca">
+<h3>7.4 PCA<a class="headerlink" href="#pca" title="Link to this heading">#</a></h3>
+<p>PCA (Principal Component Analysis) digunakan untuk mengurangi dimensi data sebelum dilakukan K-Means.</p>
+<p>Data awal memiliki 272 fitur dengan 19 mahasiswa. PCA digunakan untuk mengubah fitur-fitur tersebut menjadi sejumlah komponen utama yang tetap merepresentasikan variasi data.</p>
+<p>Pada KNIME digunakan:</p>
+<p><strong>Target Dimensions → Dimensions to reduce to → 19</strong></p>
+<p>Sehingga hasil PCA memiliki 19 dimensi.</p>
+<p>Tujuan penggunaan PCA adalah:</p>
+<ol class="arabic simple">
+<li><p>Mengurangi jumlah dimensi.</p></li>
+<li><p>Mengurangi kompleksitas data.</p></li>
+<li><p>Mempermudah proses clustering.</p></li>
+<li><p>Mempertahankan informasi utama dari 272 fitur TSFEL.</p></li>
+</ol>
+</section>
+<section id="k-means">
+<h3>7.5 K-Means<a class="headerlink" href="#k-means" title="Link to this heading">#</a></h3>
+<p>Setelah proses PCA selesai, hasil PCA digunakan sebagai input algoritma K-Means.</p>
+<p>Jumlah cluster yang digunakan:</p>
+<p><strong>K = 2</strong></p>
+<p>K-Means mengelompokkan mahasiswa berdasarkan kemiripan pola fitur PCA.</p>
+<p>Hasil pengelompokan:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Cluster</p></th>
+<th class="head text-right"><p>Jumlah Data</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>cluster_0</p></td>
+<td class="text-right"><p>15 mahasiswa</p></td>
+</tr>
+<tr class="row-odd"><td><p>cluster_1</p></td>
+<td class="text-right"><p>4 mahasiswa</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Total</strong></p></td>
+<td class="text-right"><p><strong>19 mahasiswa</strong></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Hasil tersebut menunjukkan bahwa terdapat dua kelompok pola data mahasiswa.</p>
+</section>
+<section id="interpretasi-hasil-k-means">
+<h3>7.6 Interpretasi Hasil K-Means<a class="headerlink" href="#interpretasi-hasil-k-means" title="Link to this heading">#</a></h3>
+<p>Hasil K-Means menunjukkan bahwa sebagian besar mahasiswa berada pada <code class="docutils literal notranslate"><span class="pre">cluster_0</span></code>, sedangkan 4 mahasiswa berada pada <code class="docutils literal notranslate"><span class="pre">cluster_1</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">cluster_1</span></code> memiliki jumlah anggota lebih sedikit dan menunjukkan pola fitur yang berbeda dibandingkan kelompok utama. Oleh karena itu, kelompok tersebut dapat digunakan sebagai <strong>indikasi awal data yang berpotensi menjadi pencilan</strong>.</p>
+<p>Namun, keanggotaan pada cluster yang lebih kecil tidak secara otomatis membuktikan bahwa data tersebut merupakan outlier. K-Means pada tahap ini digunakan untuk menemukan kelompok data yang memiliki pola berbeda.</p>
+</section>
+<section id="kesimpulan-tahap-k-means">
+<h3>Kesimpulan Tahap K-Means<a class="headerlink" href="#kesimpulan-tahap-k-means" title="Link to this heading">#</a></h3>
+<p>Berdasarkan proses clustering menggunakan K-Means pada KNIME, 19 mahasiswa terbagi menjadi dua kelompok, yaitu 15 mahasiswa pada <code class="docutils literal notranslate"><span class="pre">cluster_0</span></code> dan 4 mahasiswa pada <code class="docutils literal notranslate"><span class="pre">cluster_1</span></code>.</p>
+<p>Kelompok <code class="docutils literal notranslate"><span class="pre">cluster_1</span></code> memiliki pola fitur yang berbeda dari kelompok utama sehingga menjadi kandidat untuk pemeriksaan lebih lanjut sebagai data pencilan.</p>
+</section>
+</section>
+<section id="status-pengerjaan">
+<h2>8. Status Pengerjaan<a class="headerlink" href="#status-pengerjaan" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Tahap</p></th>
+<th class="head"><p>Status</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Pengumpulan data CO, CH₄, NO₂, SO₂</p></td>
+<td><p>✓ Selesai</p></td>
+</tr>
+<tr class="row-odd"><td><p>Pembentukan 365 hari</p></td>
+<td><p>✓ Selesai</p></td>
+</tr>
+<tr class="row-even"><td><p>Imputasi polinomial</p></td>
+<td><p>✓ Selesai</p></td>
+</tr>
+<tr class="row-odd"><td><p>Deteksi outlier IQR</p></td>
+<td><p>✓ Selesai</p></td>
+</tr>
+<tr class="row-even"><td><p>Perbaikan outlier dengan polinomial</p></td>
+<td><p>✓ Selesai</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ekstraksi TSFEL CO</p></td>
+<td><p>✓ 68 fitur</p></td>
+</tr>
+<tr class="row-even"><td><p>Ekstraksi TSFEL CH₄</p></td>
+<td><p>✓ 68 fitur</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ekstraksi TSFEL NO₂</p></td>
+<td><p>✓ 68 fitur</p></td>
+</tr>
+<tr class="row-even"><td><p>Ekstraksi TSFEL SO₂</p></td>
+<td><p>✓ 68 fitur</p></td>
+</tr>
+<tr class="row-odd"><td><p>Penggabungan 4 polutan</p></td>
+<td><p>✓ 272 fitur</p></td>
+</tr>
+<tr class="row-even"><td><p>Dataset mahasiswa</p></td>
+<td><p>✓ 19 mahasiswa</p></td>
+</tr>
+<tr class="row-odd"><td><p>Normalisasi data</p></td>
+<td><p>✓ Selesai</p></td>
+</tr>
+<tr class="row-even"><td><p>PCA</p></td>
+<td><p>✓ Selesai</p></td>
+</tr>
+<tr class="row-odd"><td><p>K-Means</p></td>
+<td><p>✓ Selesai</p></td>
+</tr>
+<tr class="row-even"><td><p>Pembagian cluster</p></td>
+<td><p>✓ 2 cluster</p></td>
+</tr>
+<tr class="row-odd"><td><p>Cluster 0</p></td>
+<td><p>✓ 15 mahasiswa</p></td>
+</tr>
+<tr class="row-even"><td><p>Cluster 1</p></td>
+<td><p>✓ 4 mahasiswa</p></td>
+</tr>
+<tr class="row-odd"><td><p>Identifikasi kandidat data pencilan</p></td>
+<td><p>✓ Selesai</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="ANALISIS%20KUALITAS%20UDARA%20MENGGUNAKAN%20TSFEL%2C%20PCA%2C%20DAN%20K-MEANS%20CLUSTERING.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">ANALISIS KUALITAS UDARA MENGGUNAKAN TSFEL, PCA, DAN K-MEANS CLUSTERING</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-polutan-dan-lokasi-wilayah-pengamatan">1. Data Polutan dan Lokasi Wilayah Pengamatan</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#koordinat-wilayah-pengamatan">Koordinat Wilayah Pengamatan</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kode-koordinat">Kode Koordinat</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kode-folium-untuk-jupyter-book">Kode Folium untuk Jupyter Book</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penanganan-missing-value-imputasi-polinomial">2. Penanganan Missing Value — Imputasi Polinomial</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metode">2.1 Metode</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contoh-perhitungan-manual">2.2 Contoh Perhitungan Manual</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil-imputasi">2.3 Hasil Imputasi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tabel-perbandingan-data-sebelum-dan-sesudah-imputasi">Tabel Perbandingan Data Sebelum dan Sesudah Imputasi</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deteksi-dan-perbaikan-outlier">3. Deteksi dan Perbaikan Outlier</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metode-iqr">3.1 Metode IQR</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jumlah-outlier">3.2 Jumlah Outlier</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tanggal-outlier">3.3 Tanggal Outlier</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tabel-ringkasan-outlier">Tabel Ringkasan Outlier</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perbaikan-outlier">3.4 Perbaikan Outlier</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ekstraksi-fitur-tsfel">4. Ekstraksi Fitur TSFEL</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan">4.1 Tujuan</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#instalasi-dan-persiapan">4.2 Instalasi dan Persiapan</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kode-ekstraksi-fitur">4.3 Kode Ekstraksi Fitur</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#daftar-68-fitur-tsfel">5. Daftar 68 Fitur TSFEL</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pengelompokan-domain-tsfel">Pengelompokan domain TSFEL</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penggabungan-empat-polutan">6. Penggabungan Empat Polutan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deteksi-data-pencilan-outlier-menggunakan-k-means">7. Deteksi Data Pencilan (Outlier) Menggunakan K-Means</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Tujuan</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-knime">Workflow KNIME</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#excel-reader">7.1 Excel Reader</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#column-filter">7.2 Column Filter</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizer">7.3 Normalizer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pca">7.4 PCA</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#k-means">7.5 K-Means</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretasi-hasil-k-means">7.6 Interpretasi Hasil K-Means</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-tahap-k-means">Kesimpulan Tahap K-Means</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#status-pengerjaan">8. Status Pengerjaan</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By ShofiatulMahmudah (24041100023)
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

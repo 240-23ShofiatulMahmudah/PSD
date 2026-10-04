@@ -8,3 +8,4 @@ chapters:
 - file: Analisis Statistik Dataset Iris Menggunakan PostgreSQL Aiven dan KNIME
 - file: ANALISIS KUALITAS UDARA MENGGUNAKAN TSFEL, PCA, DAN K-MEANS CLUSTERING
 - file: Pengolahan Data Polutan CO, CH₄, NO₂, dan SO₂ di Daerah Guluk-guluk Sumenep Menggunakan Imputasi Polinomial dan Ekstraksi Fitur TSFEL
+- file: Klasifikasi Sawah dan Pemukiman Menggunakan Citra Sentinel-2A

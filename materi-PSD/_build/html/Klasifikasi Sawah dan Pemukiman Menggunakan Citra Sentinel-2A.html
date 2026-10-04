@@ -751,10 +751,6 @@ File TIF diunggah ke Google Colab.
         <span class="nb">print</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">file</span><span class="p">))</span>
 </pre></div>
 </div>
-<p><img alt="image alt" src="_images/B02_%28Raw%29.tiff" />
-<img alt="image alt" src="_images/B03_%28Raw%29.tiff" />
-<img alt="image alt" src="_images/B04_%28Raw%29.tiff" />
-<img alt="image alt" src="_images/B08_%28Raw%29.tiff" /></p>
 </section>
 <section id="tahap-8-ekstraksi-nilai-band-pada-100-titik">
 <h2>Tahap 8 — Ekstraksi Nilai Band pada 100 Titik<a class="headerlink" href="#tahap-8-ekstraksi-nilai-band-pada-100-titik" title="Link to this heading">#</a></h2>
@@ -802,18 +798,18 @@ File TIF diunggah ke Google Colab.
 <span class="nb">print</span><span class="p">(</span><span class="n">hasil</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><img alt="image alt" src="_images/hasil_ekstraksi.png" />
-Hasil ekstraksi menghasilkan dataset dengan enam kolom:</p>
+<p><img alt="image alt" src="_images/hasil_ekstraksi.png" /></p>
+<p>Hasil ekstraksi menghasilkan dataset dengan enam kolom:</p>
 <ul class="simple">
 <li><p>ID</p></li>
 <li><p>area</p></li>
 <li><p>B02</p></li>
 <li><p>B03</p></li>
 <li><p>B04</p></li>
-<li><p>B08
-File hasil:
-<a class="reference download internal" download="" href="_downloads/3006eda7c1111bb24d4b43da403a4bf3/hasil_ekstraksi_sentinel.csv"><span class="xref download myst">hasil_ekstraksi_sentinel.csv</span></a></p></li>
+<li><p>B08</p></li>
 </ul>
+<p>File hasil:
+<a class="reference download internal" download="" href="_downloads/3006eda7c1111bb24d4b43da403a4bf3/hasil_ekstraksi_sentinel.csv"><span class="xref download myst">hasil_ekstraksi_sentinel.csv</span></a></p>
 <p>Dataset ini menjadi input untuk proses klasifikasi.</p>
 </section>
 <section id="tahap-9-menyimpan-dataset-hasil-ekstraksi">
@@ -973,6 +969,7 @@ Warna marker menunjukkan hasil prediksi:</p>
 <span class="n">m</span>
 </pre></div>
 </div>
+<p><img alt="image alt" src="_images/lahan.png" /></p>
 </section>
 <section id="tahap-14-membuat-tabel-hasil-klasifikasi">
 <h2>Tahap 14 — Membuat Tabel Hasil Klasifikasi<a class="headerlink" href="#tahap-14-membuat-tabel-hasil-klasifikasi" title="Link to this heading">#</a></h2>
@@ -1083,8 +1080,8 @@ Warna marker menunjukkan hasil prediksi:</p>
 <span class="p">)</span>
 </pre></div>
 </div>
-<p><img alt="image alt" src="_images/ringkasan_hasil_klasifikasi.png" />
-Ringkasan ini digunakan untuk melihat hasil akhir klasifikasi pada seluruh titik sampel.</p>
+<p><img alt="image alt" src="_images/ringkasan_hasil_klasifikasi.png" /></p>
+<p>Ringkasan ini digunakan untuk melihat hasil akhir klasifikasi pada seluruh titik sampel.</p>
 </section>
 <section id="tahap-17-kesimpulan">
 <h2>Tahap 17 — Kesimpulan<a class="headerlink" href="#tahap-17-kesimpulan" title="Link to this heading">#</a></h2>
@@ -1097,10 +1094,10 @@ Citra Sentinel-2A yang digunakan terdiri dari empat band:</p></li>
 <li><p>B02</p></li>
 <li><p>B03</p></li>
 <li><p>B04</p></li>
-<li><p>B08
-Nilai keempat band diekstraksi pada setiap titik dan digunakan sebagai fitur dalam model Random Forest.
-Model dilatih menggunakan 80% data dan diuji menggunakan 20% data. Evaluasi dilakukan menggunakan accuracy, classification report, dan confusion matrix.</p></li>
+<li><p>B08</p></li>
 </ul>
+<p>Nilai keempat band diekstraksi pada setiap titik dan digunakan sebagai fitur dalam model Random Forest.
+Model dilatih menggunakan 80% data dan diuji menggunakan 20% data. Evaluasi dilakukan menggunakan accuracy, classification report, dan confusion matrix.</p>
 <p>Hasil klasifikasi kemudian diterapkan pada seluruh 100 titik, divisualisasikan dalam bentuk peta, dan disimpan dalam tabel hasil klasifikasi.
 Dengan demikian, alur pengerjaan tugas telah mencakup proses:
 GeoJSON → Titik Sampel → AOI → Sentinel-2A/TIF → Ekstraksi Band → Random Forest → Evaluasi → Pemetaan Hasil → Tabel Klasifikasi.</p>

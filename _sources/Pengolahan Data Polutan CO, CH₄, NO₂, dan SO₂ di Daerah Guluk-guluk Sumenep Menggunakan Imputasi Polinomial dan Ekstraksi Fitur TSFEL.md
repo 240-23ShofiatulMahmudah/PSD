@@ -627,7 +627,7 @@ SO2 - auc
 File hasil penggabungan:
 
 
-[link](data_tsfel_terbaru2.xlsx)
+[Link](data_tsfel_terbaru2.xlsx)
 
 
 ---
@@ -658,13 +658,13 @@ Algoritma yang digunakan adalah **K-Means** pada software **KNIME**.
 
 Workflow yang digunakan:
 
-![image alt][cluster2.png]
+![image alt](cluster2.png)
 
 ### 7.1 Excel Reader
 
 Node **Excel Reader** digunakan untuk membaca file hasil penggabungan fitur TSFEL:
 
-[link](data_tsfel_terbaru2.xlsx)
+[Link](data_tsfel_terbaru2.xlsx)
 
 Dataset terdiri dari 19 mahasiswa dengan 274 kolom.
 

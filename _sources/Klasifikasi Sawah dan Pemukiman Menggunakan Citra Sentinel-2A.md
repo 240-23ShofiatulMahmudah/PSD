@@ -293,10 +293,6 @@ for root, dirs, files_ in os.walk(extract_folder):
     for file in files_:
         print(os.path.join(root, file))
 ```
-![image alt](B02_(Raw).tiff)
-![image alt](B03_(Raw).tiff)
-![image alt](B04_(Raw).tiff)
-![image alt](B08_(Raw).tiff)
 
 ## Tahap 8 — Ekstraksi Nilai Band pada 100 Titik
 ```python
@@ -344,6 +340,7 @@ hasil = titik[
 print(hasil)
 ```
 ![image alt](hasil_ekstraksi.png)
+
 Hasil ekstraksi menghasilkan dataset dengan enam kolom:
 - ID
 - area
@@ -351,6 +348,7 @@ Hasil ekstraksi menghasilkan dataset dengan enam kolom:
 - B03
 - B04
 - B08
+
 File hasil:
 [hasil_ekstraksi_sentinel.csv](hasil_ekstraksi_sentinel.csv)
 
@@ -505,6 +503,9 @@ for _, row in titik.iterrows():
 
 m
 ```
+
+![image alt](lahan.png)
+
 ## Tahap 14 — Membuat Tabel Hasil Klasifikasi
 
 ```python
@@ -577,6 +578,7 @@ print(
 )
 ```
 ![image alt](ringkasan_hasil_klasifikasi.png)
+
 Ringkasan ini digunakan untuk melihat hasil akhir klasifikasi pada seluruh titik sampel.
 
 ## Tahap 17 — Kesimpulan
@@ -589,6 +591,7 @@ Citra Sentinel-2A yang digunakan terdiri dari empat band:
 - B03
 - B04
 - B08
+
 Nilai keempat band diekstraksi pada setiap titik dan digunakan sebagai fitur dalam model Random Forest.
 Model dilatih menggunakan 80% data dan diuji menggunakan 20% data. Evaluasi dilakukan menggunakan accuracy, classification report, dan confusion matrix.
 

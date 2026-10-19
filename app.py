@@ -1,93 +1,140 @@
-
-import base64
-import io
-
-import folium
-import numpy as np
-import rasterio
 import streamlit as st
-from PIL import Image
-from rasterio.warp import transform_bounds
-from streamlit_folium import st_folium
+import rasterio
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from matplotlib.colors import ListedColormap
+from matplotlib.patches import Patch
+from pathlib import Path
 
-st.set_page_config(page_title="Klasifikasi Tutupan Lahan Modung", layout="wide")
-st.title("Peta Klasifikasi Tutupan Lahan — Modung")
-st.caption("Klasifikasi Sentinel-2 dengan lima kelas tutupan lahan.")
+st.set_page_config(
+    page_title="Klasifikasi Tutupan Lahan Jawa Timur",
+    page_icon="🛰️",
+    layout="wide"
+)
 
-warna = {
-    "Bangunan": (229, 57, 53),
-    "Pertanian": (253, 216, 53),
-    "Perairan": (30, 136, 229),
-    "Hutan biasa": (46, 125, 50),
-    "Mangrove": (142, 36, 170),
+st.title("🛰️ Klasifikasi Tutupan Lahan Jawa Timur")
+st.caption("Pemetaan Sentinel-2 L2A menggunakan Random Forest")
+
+FILE_TIF = Path(__file__).parent / "klasifikasi_jawa_timur_random_forest.tif"
+
+KELAS = {
+    1: "Bangunan",
+    2: "Pertanian",
+    3: "Perairan",
+    4: "Hutan biasa",
+    5: "Mangrove"
 }
 
-kode_kelas = {
-    "Bangunan": 1,
-    "Pertanian": 2,
-    "Perairan": 3,
-    "Hutan biasa": 4,
-    "Mangrove": 5,
+WARNA = {
+    1: "#e53935",
+    2: "#fdd835",
+    3: "#1e88e5",
+    4: "#1b5e20",
+    5: "#8bc34a"
 }
+
+if not FILE_TIF.exists():
+    st.error(f"File raster tidak ditemukan: {FILE_TIF.name}")
+    st.stop()
 
 @st.cache_data
-def baca_raster():
-    with rasterio.open("klasifikasi_modung.tif") as src:
-        arr = src.read(1)
-        bounds = transform_bounds(src.crs, "EPSG:4326", *src.bounds)
-    return arr, bounds
+def baca_raster(path):
+    with rasterio.open(path) as src:
+        return src.read(1), str(src.crs), tuple(src.bounds)
 
-hasil, bounds = baca_raster()
-west, south, east, north = bounds
-center = [(south + north) / 2, (west + east) / 2]
+hasil, crs, bounds = baca_raster(str(FILE_TIF))
+valid = hasil > 0
+total = int(valid.sum())
 
-peta = folium.Map(location=center, zoom_start=15, tiles=None)
+if total == 0:
+    st.error("Tidak ada piksel klasifikasi yang valid.")
+    st.stop()
 
-folium.TileLayer(
-    tiles="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
-    attr="Tiles © Esri",
-    name="Citra satelit",
-    overlay=False,
-).add_to(peta)
+rekap = []
+for kode, nama in KELAS.items():
+    jumlah = int(np.count_nonzero(hasil == kode))
+    rekap.append({
+        "Kode": kode,
+        "Kelas": nama,
+        "Jumlah piksel": jumlah,
+        "Persentase (%)": round(jumlah / total * 100, 2)
+    })
 
-for nama, kode in kode_kelas.items():
-    rgba = np.zeros((*hasil.shape, 4), dtype=np.uint8)
-    mask = hasil == kode
-    rgba[mask, :3] = warna[nama]
-    rgba[mask, 3] = 165
+df = pd.DataFrame(rekap)
 
-    buffer = io.BytesIO()
-    Image.fromarray(rgba).save(buffer, format="PNG")
-    encoded = base64.b64encode(buffer.getvalue()).decode("ascii")
-    image_uri = "data:image/png;base64," + encoded
+c1, c2, c3 = st.columns(3)
+c1.metric("Piksel terklasifikasi", f"{total:,}".replace(",", "."))
+c2.metric("Jumlah kelas", len(KELAS))
+c3.metric("CRS raster", crs)
 
-    folium.raster_layers.ImageOverlay(
-        image=image_uri,
-        bounds=[[south, west], [north, east]],
-        name=nama,
-        opacity=1,
-        show=False,
-    ).add_to(peta)
+st.subheader("Peta klasifikasi")
 
-folium.LayerControl(collapsed=False).add_to(peta)
-peta.fit_bounds([[south, west], [north, east]])
+fig, ax = plt.subplots(figsize=(12, 7))
+peta = np.ma.masked_where(~valid, hasil)
+cmap = ListedColormap([WARNA[i] for i in KELAS])
 
-st.markdown(
-    "**Petunjuk:** gunakan kontrol layer di kanan atas peta "
-    "untuk menampilkan satu atau beberapa kelas."
+ax.imshow(peta, cmap=cmap, vmin=1, vmax=5, interpolation="nearest")
+ax.set_axis_off()
+ax.legend(
+    handles=[Patch(facecolor=WARNA[k], label=KELAS[k]) for k in KELAS],
+    loc="lower left",
+    framealpha=0.95
 )
-st_folium(peta, use_container_width=True, height=650)
-
-st.subheader("Legenda kelas")
-for nama, rgb in warna.items():
-    st.markdown(
-        f'<span style="display:inline-block;width:14px;height:14px;'
-        f'background:rgb{rgb};margin-right:8px"></span>{nama}',
-        unsafe_allow_html=True,
-    )
+st.pyplot(fig, use_container_width=True)
+plt.close(fig)
 
 st.caption(
-    "Hasil merupakan klasifikasi awal berbasis sampel. "
-    "Periksa kembali akurasi tiap kelas sebelum digunakan sebagai "
-    "data resmi atau untuk pengambilan keputusan."
+    f"Batas raster: {bounds[0]:.4f}, {bounds[1]:.4f}, "
+    f"{bounds[2]:.4f}, {bounds[3]:.4f}"
+)
+
+st.subheader("Distribusi kelas")
+kiri, kanan = st.columns(2)
+
+with kiri:
+    fig, ax = plt.subplots(figsize=(7, 4))
+    ax.bar(
+        df["Kelas"],
+        df["Persentase (%)"],
+        color=[WARNA[k] for k in df["Kode"]]
+    )
+    ax.set_ylabel("Persentase (%)")
+    ax.tick_params(axis="x", rotation=25)
+    st.pyplot(fig, use_container_width=True)
+    plt.close(fig)
+
+with kanan:
+    fig, ax = plt.subplots(figsize=(7, 4))
+    ax.pie(
+        df["Jumlah piksel"],
+        labels=df["Kelas"],
+        autopct="%1.1f%%",
+        colors=[WARNA[k] for k in df["Kode"]],
+        startangle=90
+    )
+    ax.axis("equal")
+    st.pyplot(fig, use_container_width=True)
+    plt.close(fig)
+
+st.subheader("Tabel distribusi")
+st.dataframe(df, use_container_width=True, hide_index=True)
+
+st.download_button(
+    "Unduh tabel CSV",
+    data=df.to_csv(index=False).encode("utf-8-sig"),
+    file_name="distribusi_tutupan_lahan_jatim.csv",
+    mime="text/csv"
+)
+
+st.download_button(
+    "Unduh peta GeoTIFF",
+    data=FILE_TIF.read_bytes(),
+    file_name=FILE_TIF.name,
+    mime="image/tiff"
+)
+
+st.warning(
+    "Hasil merupakan estimasi model. Validasi dengan data referensi independen "
+    "diperlukan sebelum hasil digunakan sebagai luas tutupan lahan final."
 )

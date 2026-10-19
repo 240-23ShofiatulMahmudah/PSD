@@ -2,10 +2,17 @@ import streamlit as st
 import rasterio
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
-from matplotlib.colors import ListedColormap
-from matplotlib.patches import Patch
+import folium
+from folium import TileLayer
+from streamlit_folium import st_folium
 from pathlib import Path
+from rasterio.warp import transform_bounds
+from rasterio.enums import Resampling
+from matplotlib import cm
+from matplotlib.colors import to_hex
+import base64
+from io import BytesIO
+from PIL import Image
 
 st.set_page_config(
     page_title="Klasifikasi Tutupan Lahan Jawa Timur",
@@ -14,7 +21,7 @@ st.set_page_config(
 )
 
 st.title("🛰️ Klasifikasi Tutupan Lahan Jawa Timur")
-st.caption("Pemetaan Sentinel-2 L2A menggunakan Random Forest")
+st.caption("Sentinel-2 L2A • Random Forest")
 
 FILE_TIF = Path(__file__).parent / "klasifikasi_jawa_timur_random_forest.tif"
 
@@ -35,89 +42,138 @@ WARNA = {
 }
 
 if not FILE_TIF.exists():
-    st.error(f"File raster tidak ditemukan: {FILE_TIF.name}")
+    st.error(f"Raster tidak ditemukan: {FILE_TIF.name}")
     st.stop()
 
 @st.cache_data
 def baca_raster(path):
     with rasterio.open(path) as src:
-        return src.read(1), str(src.crs), tuple(src.bounds)
+        # Perkecil raster untuk tampilan web agar lebih ringan.
+        skala = min(1, 1200 / max(src.width, src.height))
+        out_h = max(1, int(src.height * skala))
+        out_w = max(1, int(src.width * skala))
 
-hasil, crs, bounds = baca_raster(str(FILE_TIF))
+        arr = src.read(
+            1,
+            out_shape=(out_h, out_w),
+            resampling=Resampling.nearest
+        )
+
+        bounds = transform_bounds(
+            src.crs, "EPSG:4326", *src.bounds, densify_pts=21
+        )
+        return arr, bounds
+
+hasil, bounds = baca_raster(str(FILE_TIF))
 valid = hasil > 0
-total = int(valid.sum())
 
-if total == 0:
-    st.error("Tidak ada piksel klasifikasi yang valid.")
-    st.stop()
+# Titik tengah raster untuk posisi awal peta.
+lon_tengah = (bounds[0] + bounds[2]) / 2
+lat_tengah = (bounds[1] + bounds[3]) / 2
 
+# Buat peta dasar dengan citra satelit.
+m = folium.Map(
+    location=[lat_tengah, lon_tengah],
+    zoom_start=8,
+    tiles=None,
+    control_scale=True
+)
+
+TileLayer(
+    tiles="OpenStreetMap",
+    name="Peta jalan",
+    overlay=False,
+    control=True
+).add_to(m)
+
+TileLayer(
+    tiles="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+    attr="Esri, Maxar, Earthstar Geographics",
+    name="Citra satelit",
+    overlay=False,
+    control=True,
+    show=True
+).add_to(m)
+
+# Konversi raster hasil klasifikasi menjadi gambar overlay transparan.
+@st.cache_data
+def buat_overlay(arr):
+    rgba = np.zeros((arr.shape[0], arr.shape[1], 4), dtype=np.uint8)
+
+    for kode, warna in WARNA.items():
+        rgb = tuple(
+            int(warna[i:i+2], 16) for i in (1, 3, 5)
+        )
+        mask = arr == kode
+        rgba[mask, 0] = rgb[0]
+        rgba[mask, 1] = rgb[1]
+        rgba[mask, 2] = rgb[2]
+        rgba[mask, 3] = 175
+
+    image = Image.fromarray(rgba, mode="RGBA")
+    buffer = BytesIO()
+    image.save(buffer, format="PNG")
+    return base64.b64encode(buffer.getvalue()).decode("utf-8")
+
+overlay_data = buat_overlay(hasil)
+
+# Setiap kelas menjadi layer terpisah yang dapat diaktifkan/dimatikan.
+for kode, nama in KELAS.items():
+    mask = (hasil == kode).astype(np.uint8) * 255
+
+    rgba = np.zeros((hasil.shape[0], hasil.shape[1], 4), dtype=np.uint8)
+    rgb = tuple(int(WARNA[kode][i:i+2], 16) for i in (1, 3, 5))
+    rgba[:, :, 0] = rgb[0]
+    rgba[:, :, 1] = rgb[1]
+    rgba[:, :, 2] = rgb[2]
+    rgba[:, :, 3] = np.where(mask > 0, 175, 0)
+
+    image = Image.fromarray(rgba, mode="RGBA")
+    buffer = BytesIO()
+    image.save(buffer, format="PNG")
+    data = base64.b64encode(buffer.getvalue()).decode("utf-8")
+
+    folium.raster_layers.ImageOverlay(
+        image=f"data:image/png;base64,{data}",
+        bounds=[
+            [bounds[1], bounds[0]],
+            [bounds[3], bounds[2]]
+        ],
+        name=nama,
+        opacity=1,
+        interactive=True,
+        cross_origin=False,
+        show=False
+    ).add_to(m)
+
+folium.LayerControl(collapsed=False).add_to(m)
+m.fit_bounds([[bounds[1], bounds[0]], [bounds[3], bounds[2]]])
+
+st.subheader("Peta interaktif")
+st.caption("Pilih citra satelit atau peta jalan, lalu aktifkan kelas melalui kontrol layer di kanan atas peta.")
+
+st_folium(
+    m,
+    use_container_width=True,
+    height=650,
+    returned_objects=[]
+)
+
+# Statistik kelas
+st.subheader("Distribusi kelas")
+total = int(np.count_nonzero(valid))
 rekap = []
+
 for kode, nama in KELAS.items():
     jumlah = int(np.count_nonzero(hasil == kode))
     rekap.append({
         "Kode": kode,
         "Kelas": nama,
         "Jumlah piksel": jumlah,
-        "Persentase (%)": round(jumlah / total * 100, 2)
+        "Persentase (%)": round(jumlah / total * 100, 2) if total else 0
     })
 
 df = pd.DataFrame(rekap)
-
-c1, c2, c3 = st.columns(3)
-c1.metric("Piksel terklasifikasi", f"{total:,}".replace(",", "."))
-c2.metric("Jumlah kelas", len(KELAS))
-c3.metric("CRS raster", crs)
-
-st.subheader("Peta klasifikasi")
-
-fig, ax = plt.subplots(figsize=(12, 7))
-peta = np.ma.masked_where(~valid, hasil)
-cmap = ListedColormap([WARNA[i] for i in KELAS])
-
-ax.imshow(peta, cmap=cmap, vmin=1, vmax=5, interpolation="nearest")
-ax.set_axis_off()
-ax.legend(
-    handles=[Patch(facecolor=WARNA[k], label=KELAS[k]) for k in KELAS],
-    loc="lower left",
-    framealpha=0.95
-)
-st.pyplot(fig, use_container_width=True)
-plt.close(fig)
-
-st.caption(
-    f"Batas raster: {bounds[0]:.4f}, {bounds[1]:.4f}, "
-    f"{bounds[2]:.4f}, {bounds[3]:.4f}"
-)
-
-st.subheader("Distribusi kelas")
-kiri, kanan = st.columns(2)
-
-with kiri:
-    fig, ax = plt.subplots(figsize=(7, 4))
-    ax.bar(
-        df["Kelas"],
-        df["Persentase (%)"],
-        color=[WARNA[k] for k in df["Kode"]]
-    )
-    ax.set_ylabel("Persentase (%)")
-    ax.tick_params(axis="x", rotation=25)
-    st.pyplot(fig, use_container_width=True)
-    plt.close(fig)
-
-with kanan:
-    fig, ax = plt.subplots(figsize=(7, 4))
-    ax.pie(
-        df["Jumlah piksel"],
-        labels=df["Kelas"],
-        autopct="%1.1f%%",
-        colors=[WARNA[k] for k in df["Kode"]],
-        startangle=90
-    )
-    ax.axis("equal")
-    st.pyplot(fig, use_container_width=True)
-    plt.close(fig)
-
-st.subheader("Tabel distribusi")
 st.dataframe(df, use_container_width=True, hide_index=True)
 
 st.download_button(
@@ -135,6 +191,6 @@ st.download_button(
 )
 
 st.warning(
-    "Hasil merupakan estimasi model. Validasi dengan data referensi independen "
-    "diperlukan sebelum hasil digunakan sebagai luas tutupan lahan final."
+    "Hasil klasifikasi merupakan estimasi model dan perlu divalidasi "
+    "menggunakan data referensi independen."
 )

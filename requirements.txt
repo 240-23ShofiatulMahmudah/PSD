@@ -3,3 +3,6 @@ rasterio
 numpy
 pandas
 matplotlib
+folium
+streamlit-folium
+Pillow
